@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Taller: Construye tu Robot con Manualidades</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "brand-blue": "#1B4FD8",
+            "brand-blue-dark": "#1540b8",
+            "brand-yellow": "#FFD600",
+            "brand-orange": "#FF6B1A",
+            "brand-green": "#22c55e",
+            "ink": "#0f172a",
+            "ink-soft": "#475569",
+            "paper": "#FAFAF8",
+            "paper-warm": "#F5F0E8",
+            "card-bg": "#FFFFFF",
+          },
+          fontFamily: {
+            "display": ["Bricolage Grotesque", "sans-serif"],
+            "body": ["DM Sans", "sans-serif"],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .font-display {
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .hero-bg {
+      background-color: #0f172a;
+      background-image: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(27, 79, 216, 0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255, 107, 26, 0.18) 0%, transparent 60%);
+    }
+
+    .badge-differential {
+      background: linear-gradient(135deg, #1B4FD8 0%, #0f2fa8 100%);
+    }
+
+    .btn-primary {
+      background: #FFD600;
+      color: #0f172a;
+      font-weight: 700;
+      border-radius: 0.5rem;
+      padding: 0.9rem 2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 14px rgba(255, 214, 0, 0.35);
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 214, 0, 0.45);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #e2e8f0;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      padding: 0.9rem 2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.05rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-cta {
+      background: #1B4FD8;
+      color: white;
+      font-weight: 700;
+      border-radius: 0.5rem;
+      padding: 1rem 2.2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 14px rgba(27, 79, 216, 0.3);
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .btn-cta:hover {
+      background: #1540b8;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #1B4FD8;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      padding: 1rem 2.2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.1rem;
+      border: 2px solid #1B4FD8;
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .btn-outline:hover {
+      background: #1B4FD8;
+      color: white;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+
+    .check-icon {
+      color: #22c55e;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .differential-bar {
+      background: #0f172a;
+      border-top: 3px solid #FFD600;
+      border-bottom: 3px solid #FFD600;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.75rem;
+      border: 1px solid #e2e8f0;
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: -0.5rem;
+      left: 1.25rem;
+      font-size: 4rem;
+      color: #1B4FD8;
+      line-height: 1;
+      font-family: Georgia, serif;
+      opacity: 0.25;
+    }
+
+    .step-circle {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: #1B4FD8;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .section-label {
+      display: inline-block;
+      background: #EFF3FF;
+      color: #1B4FD8;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* Hero image grid placeholders */
+    .robot-img-slot {
+      background: linear-gradient(135deg, #1e3a6e 0%, #0f172a 100%);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      border: 1.5px dashed rgba(255,255,255,0.2);
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+    .robot-img-slot:hover {
+      border-color: rgba(255, 214, 0, 0.5);
+    }
+    .robot-img-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+    .robot-img-slot .slot-label {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    /* Age badge colors */
+    .age-7 { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+    .age-8 { background: #dbeafe; color: #1e40af; border-color: #93c5fd; }
+    .age-9 { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+    .age-10 { background: #ede9fe; color: #5b21b6; border-color: #c4b5fd; }
+    .age-11 { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
+    .robot-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border: 1px solid #e2e8f0;
+      transition: all 0.2s;
+    }
+    .robot-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transform: translateY(-3px);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in   { animation: fadeInUp 0.6s ease-out both; }
+    .fade-in-2 { animation: fadeInUp 0.6s 0.15s ease-out both; }
+    .fade-in-3 { animation: fadeInUp 0.6s 0.3s ease-out both; }
+  </style>
+</head>
+
+<body class="bg-paper text-ink antialiased">
+
+  <!-- NAV -->
+  <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
+    <nav class="flex justify-between items-center w-full px-6 py-3.5 max-w-6xl mx-auto">
+      <div class="font-display font-bold text-lg tracking-tight text-ink flex items-center gap-2">
+        <span style="font-size:1.4rem">🤖</span> Taller de Robótica
+      </div>
+      <a href="#registro" class="btn-primary py-2.5 px-5 text-sm">
+        👉 Apuntarse
+      </a>
+    </nav>
+  </header>
+
+  <!-- ===== HERO MEJORADO — 4 imágenes ===== -->
+  <section class="hero-bg pt-28 pb-20 px-6 relative overflow-hidden">
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;"></div>
+
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-14 relative z-10">
+
+      <!-- TEXTO -->
+      <div class="w-full lg:w-[50%]">
+        <div class="inline-flex items-center gap-2 bg-brand-yellow/20 text-brand-yellow border border-brand-yellow/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+          <span>📅</span> Junio 2026 · Plazas limitadas
+        </div>
+
+        <h1 class="font-display text-4xl md:text-5xl lg:text-[3.4rem] font-extrabold text-white leading-[1.08] mb-5">
+          Tu hijo construirá<br />
+          <span style="color:#FFD600;">su propio robot</span><br />
+          <span class="text-slate-300 text-3xl md:text-4xl font-bold">adaptado a su edad</span>
+        </h1>
+
+        <p class="text-slate-300 text-lg mb-6 leading-relaxed max-w-lg">
+          Un taller 100% práctico para niños de <strong class="text-white">7 a 11 años</strong>. Cada niño construye el robot que le corresponde a su edad: un robot araña, un robot pintor, un robot que se desplaza… ¡y se lo lleva a casa!
+        </p>
+
+        <div class="flex flex-wrap gap-4 mb-8">
+          <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">✔ Sin experiencia previa</span>
+          <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">✔ Material incluido</span>
+          <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">✔ Se lleva su robot a casa</span>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="#registro" class="btn-primary">👉 Reservar plaza ahora</a>
+        </div>
+
+        <p class="text-xs text-slate-400 mt-4">
+          Actividad guiada por profesor especializado · Grupos reducidos · 7–11 años
+        </p>
+      </div>
+
+      <!-- CUADRÍCULA DE 4 IMÁGENES -->
+      <div class="w-full lg:w-[50%] fade-in-2">
+        <div class="grid grid-cols-2 gap-3">
+
+          <!-- Slot 1 -->
+          <div class="robot-img-slot">
+            <img src="img/img1.jpg" alt="Robot Araña" />
+          </div>
+
+          <!-- Slot 2 -->
+          <div class="robot-img-slot">
+            <img src="img/img2.png" alt="Robot Pintor" />
+          </div>
+
+          <!-- Slot 3 -->
+          <div class="robot-img-slot">
+            <img src="img/img3.png" alt="Robot con Ruedas" />
+          </div>
+
+          <!-- Slot 4 -->
+          <div class="robot-img-slot">
+            <img src="img/img4.png" alt="Robot con Luces" />
+          </div>
+
+        </div>
+
+        <!-- Refuerzo rápido -->
+        <div class="mt-3 flex flex-wrap gap-3 justify-center text-sm text-white font-semibold">
+          <span>✅ Robot real</span>
+          <span>✅ Con motor</span>
+          <span>✅ Lo construyen ellos</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ¿ES ADECUADO PARA MI HIJO? ===== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
+      <div class="lg:w-1/2">
+        <span class="section-label">Para quién es</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink mb-6">¿Es adecuado para mi hijo?</h2>
+        <p class="text-ink-soft mb-6">Este taller es ideal si tu hijo:</p>
+        <div class="space-y-3 mb-6">
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Tiene entre <strong>7 y 11 años</strong></span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Le gusta construir, crear y montar cosas con las manos</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Siente curiosidad por cómo funcionan los aparatos</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Prefiere aprender <strong>haciendo</strong> en lugar de escuchando</span>
+          </div>
+        </div>
+        <div class="bg-blue-50 border-l-4 border-brand-blue rounded-r-lg px-5 py-4">
+          <p class="text-brand-blue font-semibold">No necesita experiencia previa. El robot que construya estará adaptado a su edad y sus capacidades.</p>
+        </div>
+      </div>
+      <div class="lg:w-1/2">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">👦</div>
+            <p class="font-display font-bold text-ink">7 a 11 años</p>
+            <p class="text-xs text-ink-soft mt-1">Rango de edad</p>
+          </div>
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">👥</div>
+            <p class="font-display font-bold text-ink">Grupos reducidos</p>
+            <p class="text-xs text-ink-soft mt-1">Atención personalizada</p>
+          </div>
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">🔰</div>
+            <p class="font-display font-bold text-ink">0 experiencia</p>
+            <p class="text-xs text-ink-soft mt-1">Requerida</p>
+          </div>
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">🏠</div>
+            <p class="font-display font-bold text-ink">Se lo lleva</p>
+            <p class="text-xs text-ink-soft mt-1">Su robot a casa</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ROBOTS POR EDAD ===== -->
+  <section class="py-20 px-6 bg-paper" id="robots">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-4">
+        <span class="section-label">Robots por edad</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">Cada niño construye su robot</h2>
+        <p class="text-ink-soft mt-3 max-w-xl mx-auto">El robot se adapta a la edad del niño: cuantos más años, mayor complejidad y más funciones. ¡Siempre divertido, siempre alcanzable!</p>
+      </div>
+
+      <!-- Aviso de adaptación -->
+      <div class="mb-10 flex justify-center">
+        <div class="bg-brand-blue/10 border border-brand-blue/20 rounded-xl px-6 py-3 text-center max-w-lg">
+          <p class="text-brand-blue font-semibold text-sm">🎯 Al inscribirse, indicad la edad del niño. Prepararemos el robot adecuado para él.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- 7 años -->
+        <div class="robot-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🕷️</div>
+            <div>
+              <span class="inline-block text-xs font-bold px-3 py-1 rounded-full border age-7 mb-1">7 años</span>
+              <h3 class="font-display font-bold text-ink text-lg leading-tight">Robot Araña</h3>
+            </div>
+          </div>
+          <p class="text-ink-soft text-sm mb-3">Una araña robótica con patas móviles que vibra y se mueve sola gracias a su pequeño motor. ¡Simple, divertida y sorprendente!</p>
+          <div class="bg-slate-50 rounded-lg p-3 text-xs text-ink-soft">
+            <p class="font-semibold text-ink mb-1">Materiales:</p>
+            <p>Pilas AA · Porta-pilas · Motor eléctrico · Tubos de limpiapipas · Cartón</p>
+          </div>
+        </div>
+
+        <!-- 8 años -->
+        <div class="robot-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🎨</div>
+            <div>
+              <span class="inline-block text-xs font-bold px-3 py-1 rounded-full border age-8 mb-1">8 años</span>
+              <h3 class="font-display font-bold text-ink text-lg leading-tight">Robot Pintor</h3>
+            </div>
+          </div>
+          <p class="text-ink-soft text-sm mb-3">Un robot que sostiene rotuladores y, al vibrar con el motor, dibuja patrones y formas sobre papel. ¡Cada robot crea su propia obra de arte!</p>
+          <div class="bg-slate-50 rounded-lg p-3 text-xs text-ink-soft">
+            <p class="font-semibold text-ink mb-1">Materiales:</p>
+            <p>Pilas AA · Porta-pilas · Motor eléctrico · Tarro o bote · Rotuladores · Cinta</p>
+          </div>
+        </div>
+
+        <!-- 9 años -->
+        <div class="robot-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🚗</div>
+            <div>
+              <span class="inline-block text-xs font-bold px-3 py-1 rounded-full border age-9 mb-1">9 años</span>
+              <h3 class="font-display font-bold text-ink text-lg leading-tight">Robot con Ruedas</h3>
+            </div>
+          </div>
+          <p class="text-ink-soft text-sm mb-3">Un pequeño vehículo robótico con motor y ruedas que se desplaza por el suelo. Aprenden a montar un circuito eléctrico sencillo con interruptor.</p>
+          <div class="bg-slate-50 rounded-lg p-3 text-xs text-ink-soft">
+            <p class="font-semibold text-ink mb-1">Materiales:</p>
+            <p>Pilas AA · Porta-pilas · Motor eléctrico · Ruedas · Base de cartón rígido · Interruptor</p>
+          </div>
+        </div>
+
+        <!-- 10 años -->
+        <div class="robot-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">💡</div>
+            <div>
+              <span class="inline-block text-xs font-bold px-3 py-1 rounded-full border age-10 mb-1">10 años</span>
+              <h3 class="font-display font-bold text-ink text-lg leading-tight">Robot con Luces</h3>
+            </div>
+          </div>
+          <p class="text-ink-soft text-sm mb-3">Un robot que se desplaza y además incorpora LEDs en su estructura. Aprenden a combinar motor y luces en un mismo circuito con porta-pilas.</p>
+          <div class="bg-slate-50 rounded-lg p-3 text-xs text-ink-soft">
+            <p class="font-semibold text-ink mb-1">Materiales:</p>
+            <p>Pilas AA · Porta-pilas · Motor eléctrico · LEDs · Cables · Base de manualidades</p>
+          </div>
+        </div>
+
+        <!-- 11 años -->
+        <div class="robot-card sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🦾</div>
+            <div>
+              <span class="inline-block text-xs font-bold px-3 py-1 rounded-full border age-11 mb-1">11 años</span>
+              <h3 class="font-display font-bold text-ink text-lg leading-tight">Robot con Brazo</h3>
+            </div>
+          </div>
+          <p class="text-ink-soft text-sm mb-3">Un robot articulado con brazo móvil controlado manualmente. Mayor complejidad mecánica: montan engranajes y palancas para mover el brazo.</p>
+          <div class="bg-slate-50 rounded-lg p-3 text-xs text-ink-soft">
+            <p class="font-semibold text-ink mb-1">Materiales:</p>
+            <p>Pilas AA · Porta-pilas · Motor eléctrico · Palillos / paletas · Cartón grueso · Bridas</p>
+          </div>
+        </div>
+
+        <!-- Comodín / todos -->
+        <div class="robot-card bg-brand-blue/5 border-brand-blue/20 sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🌟</div>
+            <div>
+              <span class="inline-block text-xs font-bold px-3 py-1 rounded-full border bg-yellow-50 text-yellow-800 border-yellow-300 mb-1">Todos los robots</span>
+              <h3 class="font-display font-bold text-ink text-lg leading-tight">¿Qué tienen en común?</h3>
+            </div>
+          </div>
+          <p class="text-ink-soft text-sm mb-3">Sea cual sea la edad, todos los robots comparten la misma base: pilas, porta-pilas y motor eléctrico. El resto son manualidades que cambian con la edad.</p>
+          <div class="bg-brand-yellow/20 border border-brand-yellow/40 rounded-lg p-3 text-xs text-yellow-900 font-semibold">
+            ⭐ Todos se llevan su robot a casa al terminar el taller.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUÉ APRENDERÁN ===== -->
+  <section class="py-20 px-6 bg-white" id="aprendizaje">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Aprendizaje</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">¿Qué aprenderán?</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🔋</div>
+          <h4 class="font-display font-bold text-ink mb-2">Electrónica básica</h4>
+          <p class="text-sm text-ink-soft">Entenderán cómo funciona un circuito eléctrico: pilas, motor e interruptor.</p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🤲</div>
+          <h4 class="font-display font-bold text-ink mb-2">Manualidades técnicas</h4>
+          <p class="text-sm text-ink-soft">Cortarán, pegarán y ensamblarán piezas para dar forma a su robot.</p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🧠</div>
+          <h4 class="font-display font-bold text-ink mb-2">Resolución de problemas</h4>
+          <p class="text-sm text-ink-soft">Aprenderán a detectar qué falla y cómo arreglarlo: el método del ingeniero.</p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🎯</div>
+          <h4 class="font-display font-bold text-ink mb-2">Probar y mejorar</h4>
+          <p class="text-sm text-ink-soft">Pondrán en marcha su robot y harán ajustes hasta que funcione a la perfección.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KIT INCLUIDO ===== -->
+  <section class="py-20 px-6 bg-paper" id="materiales">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Material</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">Kit incluido</h2>
+        <p class="text-ink-soft mt-2">Todo el material está incluido en el precio — <strong>y el robot se lo llevan a casa</strong>.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-brand-blue hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-yellow-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-yellow-600 text-2xl">battery_charging_full</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Pilas</p>
+          <p class="text-xs text-ink-soft mt-1">Fuente de energía</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-brand-blue hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-brand-blue text-2xl">battery_saver</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Porta-pilas</p>
+          <p class="text-xs text-ink-soft mt-1">Con interruptor</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-brand-blue hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-green-600 text-2xl">settings</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Motor eléctrico</p>
+          <p class="text-xs text-ink-soft mt-1">El corazón del robot</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-brand-blue hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-brand-orange text-2xl">construction</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Material manualidades</p>
+          <p class="text-xs text-ink-soft mt-1">Según el robot de su edad</p>
+        </div>
+      </div>
+      <div class="mt-8 bg-ink rounded-2xl p-6 text-white text-center max-w-2xl mx-auto">
+        <p class="text-slate-300 text-sm mb-2">Los materiales de manualidades varían según el robot:</p>
+        <div class="flex flex-wrap gap-2 justify-center text-xs font-semibold">
+          <span class="bg-white/10 rounded-full px-3 py-1">Limpiapipas y cartón</span>
+          <span class="bg-white/10 rounded-full px-3 py-1">Rotuladores y botes</span>
+          <span class="bg-white/10 rounded-full px-3 py-1">Ruedas y palillos</span>
+          <span class="bg-white/10 rounded-full px-3 py-1">LEDs y cables</span>
+          <span class="bg-white/10 rounded-full px-3 py-1">Paletas y bridas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CÓMO FUNCIONA ===== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Dinámica</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">¿Cómo es el taller?</h2>
+      </div>
+      <div class="bg-ink rounded-2xl p-8 md:p-12 text-white">
+        <p class="text-slate-300 text-lg text-center mb-10">Cada niño construye <strong class="text-white">su propio robot</strong> de principio a fin, con la guía del monitor. Todo de forma <strong class="text-white">sencilla, visual y práctica</strong>.</p>
+        <div class="flex flex-col md:flex-row gap-6 justify-center">
+          <div class="flex items-center gap-4 bg-white/10 rounded-xl p-5 flex-1">
+            <div class="step-circle">1</div>
+            <div>
+              <p class="font-bold text-white">Presentamos el robot</p>
+              <p class="text-sm text-slate-400">El monitor explica qué van a construir y cómo funciona</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 bg-white/10 rounded-xl p-5 flex-1">
+            <div class="step-circle">2</div>
+            <div>
+              <p class="font-bold text-white">Construcción paso a paso</p>
+              <p class="text-sm text-slate-400">Montan el robot con los materiales: manualidades y electrónica</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 bg-white/10 rounded-xl p-5 flex-1">
+            <div class="step-circle">3</div>
+            <div>
+              <p class="font-bold text-white">¡A funcionar!</p>
+              <p class="text-sm text-slate-400">Prueban su robot, lo ajustan y lo preparan para llevarlo a casa</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUÉ DESARROLLA ===== -->
+  <section class="py-20 px-6 bg-paper">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Habilidades</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">¿Qué desarrolla este taller?</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200">
+          <div class="text-3xl mb-2">🧠</div>
+          <p class="font-bold text-sm">Pensamiento lógico</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200">
+          <div class="text-3xl mb-2">🎯</div>
+          <p class="font-bold text-sm">Concentración</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200">
+          <div class="text-3xl mb-2">🤲</div>
+          <p class="font-bold text-sm">Habilidad manual</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200">
+          <div class="text-3xl mb-2">💡</div>
+          <p class="font-bold text-sm">Resolución de problemas</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200 col-span-2 md:col-span-1">
+          <div class="text-3xl mb-2">⭐</div>
+          <p class="font-bold text-sm">Confianza en sí mismos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INFO DEL TALLER ===== -->
+  <section class="py-20 px-6 bg-ink text-white" id="horario">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+      <div class="md:w-1/2">
+        <span class="inline-block bg-white/10 text-white/70 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">Información</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold mb-8">Información del taller</h2>
+        <div class="space-y-5">
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-brand-blue rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">calendar_month</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Cuándo</p>
+              <p class="font-bold text-lg">📅 Junio 2026</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-brand-blue rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">location_on</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Dónde</p>
+              <p class="font-bold text-lg">📍 Laboratorio de Innovación Tecnológica</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-brand-blue rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">child_care</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Edad</p>
+              <p class="font-bold text-lg">👦 7 a 11 años</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-brand-orange rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">warning</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Disponibilidad</p>
+              <p class="font-bold text-lg text-brand-yellow">👥 Plazas limitadas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md:w-1/2 w-full">
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-7 border border-white/10">
+          <h3 class="font-display text-xl font-bold mb-5">¿Cómo será la experiencia?</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]">1</div>
+              <div>
+                <p class="font-semibold">Asignamos el robot según la edad</p>
+                <p class="text-sm text-slate-400">Cada niño sabe qué robot va a construir</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]">2</div>
+              <div>
+                <p class="font-semibold">Construcción con materiales reales</p>
+                <p class="text-sm text-slate-400">Motor, pilas, porta-pilas y manualidades</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]">3</div>
+              <div>
+                <p class="font-semibold">Pruebas reales</p>
+                <p class="text-sm text-slate-400">Comprueban que su robot funciona de verdad</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]" style="background:#FFD600;color:#0f172a;">4</div>
+              <div>
+                <p class="font-semibold text-brand-yellow">¡A casa con su robot!</p>
+                <p class="text-sm text-slate-400">Se lo llevan funcionando al terminar</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA CIERRE ===== -->
+  <section class="py-24 px-6 bg-brand-blue" id="registro">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="font-display text-4xl md:text-5xl font-extrabold text-white mb-4">¡Plazas muy limitadas!</h2>
+      <p class="text-blue-100 text-lg mb-8">Grupos reducidos para garantizar atención personalizada.<br />Reserva ahora e indica la edad de tu hijo — ¡le prepararemos su robot!</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="https://forms.gle" target="_blank"
+          class="bg-brand-yellow text-ink font-extrabold px-10 py-4 rounded-lg text-lg shadow-lg hover:bg-yellow-400 transition-all duration-200 flex items-center gap-2">
+          👉 Inscribirse ahora
+        </a>
+      </div>
+      <p class="mt-8 text-blue-200 text-sm">📅 Junio 2026 · 📍 Laboratorio de Innovación Tecnológica · 👦 7–11 años</p>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-slate-950 border-t border-slate-800/50">
+    <div class="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4 font-body text-xs">
+      <div class="text-lg font-bold text-indigo-300 font-headline">robotikSD</div>
+      <div class="text-slate-400 text-center">
+        <strong class="text-slate-300">Robótica &amp; Manualidades</strong> · Actividad Extraescolar<br />
+        <span class="text-slate-500">www.altaduna-saladares.com</span>
+      </div>
+      <div class="text-slate-600">© 2026 Academia Tecópolis. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Taller: Construye tu primera grúa robótica</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "brand-blue": "#1B4FD8",
+            "brand-blue-dark": "#1540b8",
+            "brand-yellow": "#FFD600",
+            "brand-orange": "#FF6B1A",
+            "brand-green": "#22c55e",
+            "ink": "#0f172a",
+            "ink-soft": "#475569",
+            "paper": "#FAFAF8",
+            "paper-warm": "#F5F0E8",
+            "card-bg": "#FFFFFF",
+          },
+          fontFamily: {
+            "display": ["Bricolage Grotesque", "sans-serif"],
+            "body": ["DM Sans", "sans-serif"],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .font-display {
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .hero-bg {
+      background-color: #0f172a;
+      background-image: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(27, 79, 216, 0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255, 107, 26, 0.12) 0%, transparent 60%);
+    }
+
+    .badge-differential {
+      background: linear-gradient(135deg, #1B4FD8 0%, #0f2fa8 100%);
+    }
+
+    .btn-primary {
+      background: #FFD600;
+      color: #0f172a;
+      font-weight: 700;
+      border-radius: 0.5rem;
+      padding: 0.9rem 2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 14px rgba(255, 214, 0, 0.35);
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 214, 0, 0.45);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #e2e8f0;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      padding: 0.9rem 2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.05rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-cta {
+      background: #1B4FD8;
+      color: white;
+      font-weight: 700;
+      border-radius: 0.5rem;
+      padding: 1rem 2.2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 14px rgba(27, 79, 216, 0.3);
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .btn-cta:hover {
+      background: #1540b8;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #1B4FD8;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      padding: 1rem 2.2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.1rem;
+      border: 2px solid #1B4FD8;
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .btn-outline:hover {
+      background: #1B4FD8;
+      color: white;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+
+    .check-icon {
+      color: #22c55e;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .differential-bar {
+      background: #0f172a;
+      border-top: 3px solid #FFD600;
+      border-bottom: 3px solid #FFD600;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.75rem;
+      border: 1px solid #e2e8f0;
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: -0.5rem;
+      left: 1.25rem;
+      font-size: 4rem;
+      color: #1B4FD8;
+      line-height: 1;
+      font-family: Georgia, serif;
+      opacity: 0.25;
+    }
+
+    .step-circle {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: #1B4FD8;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .section-label {
+      display: inline-block;
+      background: #EFF3FF;
+      color: #1B4FD8;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .photo-placeholder {
+      background: linear-gradient(135deg, #1e3a6e 0%, #0f172a 100%);
+      border-radius: 1rem;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-placeholder-inner {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    .fade-in-2 {
+      animation: fadeInUp 0.6s 0.15s ease-out both;
+    }
+
+    .fade-in-3 {
+      animation: fadeInUp 0.6s 0.3s ease-out both;
+    }
+  </style>
+</head>
+
+<body class="bg-paper text-ink antialiased">
+
+  <!-- NAV -->
+  <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
+    <nav class="flex justify-between items-center w-full px-6 py-3.5 max-w-6xl mx-auto">
+      <div class="font-display font-bold text-lg tracking-tight text-ink flex items-center gap-2">
+        <span style="font-size:1.4rem">🏗</span> Taller de Robótica
+      </div>
+      <a href="#registro" class="btn-primary py-2.5 px-5 text-sm">
+        👉 Apuntarse
+      </a>
+    </nav>
+  </header>
+
+  <!-- ===== HERO ===== 
+<section class="hero-bg pt-28 pb-20 px-6 relative overflow-hidden">
+  
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;"></div>
+
+  <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-14 relative z-10">
+
+    <div class="w-full lg:w-[52%]">
+      <div class="inline-flex items-center gap-2 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 fade-in">
+        <span>📅</span> Junio 2026 · Plazas limitadas
+      </div>
+
+      <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] mb-5 fade-in-2">
+        Construye tu primera<br/>
+        <span style="color:#FFD600;">grúa robótica</span>
+      </h1>
+
+      <p class="text-slate-300 text-lg mb-6 leading-relaxed max-w-lg fade-in-3">
+        Un taller práctico donde tu hijo aprenderá tecnología construyendo con sus propias manos <strong class="text-white">(sin pantallas)</strong>.
+      </p>
+
+
+      <div class="flex flex-wrap gap-4 mb-8 fade-in-3">
+        <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">
+          <span style="color:#22c55e;font-size:1rem;">✔</span> Sin experiencia previa
+        </span>
+        <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">
+          <span style="color:#22c55e;font-size:1rem;">✔</span> Material incluido
+        </span>
+        <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">
+          <span style="color:#22c55e;font-size:1rem;">✔</span> Se lleva su proyecto a casa
+        </span>
+      </div>
+
+
+      <div class="flex flex-wrap gap-3 fade-in-3">
+        <a href="#registro" class="btn-primary">👉 Apuntarse al taller</a>
+
+      </div>
+    </div>
+
+
+    <div class="w-full lg:w-[48%] fade-in-2">
+
+      <div class="rounded-xl overflow-hidden shadow-2xl border border-white/10" style="aspect-ratio:4/3;background:linear-gradient(135deg,#1e3a6e,#0f172a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;padding:2rem;text-align:center;">
+        <div style="font-size:4rem;">📸</div>
+        <p style="color:rgba(255,255,255,0.55);font-size:0.95rem;max-width:260px;line-height:1.5;">
+          <strong style="color:rgba(255,255,255,0.85);">Añade aquí una foto real</strong><br/>
+          de niños construyendo en el taller.<br/>
+          <span style="font-size:0.8rem;opacity:0.7;">Una imagen aumenta las inscripciones más que cualquier texto.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+  <!-- ===== HERO MEJORADO ===== -->
+  <section class="hero-bg pt-28 pb-20 px-6 relative overflow-hidden">
+    <div
+      style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;">
+    </div>
+
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-14 relative z-10">
+
+      <!-- TEXTO -->
+      <div class="w-full lg:w-[52%]">
+
+        <!-- URGENCIA REAL -->
+        <div
+          class="inline-flex items-center gap-2 bg-brand-yellow/20 text-brand-yellow border border-brand-yellow/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+           <span>📅</span> Junio 2026 · Plazas limitadas
+        </div>
+
+        <!-- TITULAR MÁS DIRECTO -->
+        <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] mb-5">
+          Tu hijo construirá una<br />
+          <span style="color:#FFD600;">grúa robótica real</span>
+        </h1>
+
+        <!-- SUBTÍTULO MÁS ORIENTADO A PADRES -->
+        <p class="text-slate-300 text-lg mb-6 leading-relaxed max-w-lg">
+          Un taller práctico donde aprenderá tecnología <strong class="text-white">con sus manos</strong>, desarrollando
+          lógica, concentración y confianza.
+        </p>
+
+        <!-- BENEFICIOS CLAROS -->
+        <div class="flex flex-wrap gap-4 mb-8">
+          <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">
+            ✔ Sin experiencia previa
+          </span>
+          <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">
+            ✔ Material incluido
+          </span>
+          <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">
+            ✔ Se lleva su proyecto a casa
+          </span>
+        </div>
+
+        <!-- CTA MÁS CLARO -->
+        <div class="flex flex-wrap gap-3">
+          <a href="#registro" class="btn-primary">👉 Reservar plaza ahora</a>
+        </div>
+
+        <!-- MICRO-CONFIANZA -->
+        <p class="text-xs text-slate-400 mt-4">
+          Actividad guiada por profesor especializado · Grupos reducidos
+        </p>
+
+      </div>
+
+      <!-- IMAGEN REAL -->
+      <div class="w-full lg:w-[48%]">
+        <div class="rounded-xl overflow-hidden shadow-2xl border border-white/10">
+          <img src="img/img_grua.png" alt="Niños construyendo robot" class="w-full h-full object-cover" />
+        </div>
+
+        <!-- REFUERZO VISUAL -->
+        <div class="mt-4 bg-white/10 backdrop-blur-md rounded-lg p-4 text-center">
+          <div class="flex flex-wrap gap-4 text-sm text-white font-semibold">
+            <span>✅ Proyecto real</span>
+            <span>✅ Sin teoría</span>
+            <span>✅ Aprenden haciendo</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXTRA: MEJORA DE FONDO (OPCIONAL) -->
+  <style>
+    .hero-bg {
+      background-color: #0f172a;
+      background-image: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(27, 79, 216, 0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255, 107, 26, 0.18) 0%, transparent 60%);
+    }
+  </style>
+
+
+  <!-- ===== BLOQUE DIFERENCIAL ===== -->
+  <!-- <div class="differential-bar py-4 px-6">
+  <div class="max-w-6xl mx-auto flex flex-wrap justify-center gap-6 md:gap-10">
+    <span class="text-red-400 font-bold text-sm md:text-base flex items-center gap-1.5">❌ Sin pantallas</span>
+    <span class="text-red-400 font-bold text-sm md:text-base flex items-center gap-1.5">❌ Sin teoría</span>
+    <span class="text-green-400 font-bold text-sm md:text-base flex items-center gap-1.5">✅ 100% práctico</span>
+    <span class="text-green-400 font-bold text-sm md:text-base flex items-center gap-1.5">✅ Aprenden haciendo</span>
+  </div>
+</div> -->
+
+  <!-- ===== ¿ES ADECUADO PARA MI HIJO? ===== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
+      <div class="lg:w-1/2">
+        <span class="section-label">Para quién es</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink mb-6">¿Es adecuado para mi hijo?</h2>
+        <p class="text-ink-soft mb-6">Este taller es ideal si tu hijo:</p>
+        <div class="space-y-3 mb-6">
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl"
+              style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Disfruta construyendo o montando cosas</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl"
+              style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Tiene curiosidad por cómo funcionan los aparatos</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl"
+              style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Le gusta aprender haciendo</span>
+          </div>
+        </div>
+        <div class="bg-blue-50 border-l-4 border-brand-blue rounded-r-lg px-5 py-4">
+          <p class="text-brand-blue font-semibold">No necesita experiencia previa. Nosotros le guiamos paso a paso.</p>
+        </div>
+      </div>
+      <div class="lg:w-1/2">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">👦</div>
+            <p class="font-display font-bold text-ink">8 a 11 años</p>
+            <p class="text-xs text-ink-soft mt-1">Edad ideal</p>
+          </div>
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">👥</div>
+            <p class="font-display font-bold text-ink">Grupos reducidos</p>
+            <p class="text-xs text-ink-soft mt-1">Atención personalizada</p>
+          </div>
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">🔰</div>
+            <p class="font-display font-bold text-ink">0 experiencia</p>
+            <p class="text-xs text-ink-soft mt-1">Requerida</p>
+          </div>
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">🏠</div>
+            <p class="font-display font-bold text-ink">Se lo lleva</p>
+            <p class="text-xs text-ink-soft mt-1">A casa al terminar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUÉ APRENDERÁN ===== -->
+  <section class="py-20 px-6 bg-paper" id="aprendizaje">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Aprendizaje</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">¿Qué aprenderán?</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="bg-white rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🧠</div>
+          <h4 class="font-display font-bold text-ink mb-2">Dar órdenes a una máquina</h4>
+          <p class="text-sm text-ink-soft">Entenderán cómo se controla un mecanismo real.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🔌</div>
+          <h4 class="font-display font-bold text-ink mb-2">Conectar componentes</h4>
+          <p class="text-sm text-ink-soft">Aprenderán electrónica básica de forma segura.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🏗</div>
+          <h4 class="font-display font-bold text-ink mb-2">Construir una estructura</h4>
+          <p class="text-sm text-ink-soft">Montarán una grúa funcional con sus propias manos.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🎯</div>
+          <h4 class="font-display font-bold text-ink mb-2">Probar y mejorar</h4>
+          <p class="text-sm text-ink-soft">Harán pruebas reales y ajustarán su propio proyecto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUÉ CONSTRUIRÁN ===== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
+      <div class="lg:w-1/2">
+        <span class="section-label">El proyecto</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink mb-4">¿Qué construirán?</h2>
+        <p class="text-ink-soft text-lg mb-6">Cada alumno construirá una <strong class="text-ink">grúa robótica
+            funcional</strong> que podrá controlar con un mando.</p>
+        <div class="space-y-3 mb-6">
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl"
+              style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Movimiento del brazo</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl"
+              style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Sistema de control manual</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl"
+              style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Capacidad para levantar objetos</span>
+          </div>
+        </div>
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl px-5 py-4">
+          <p class="text-yellow-800 font-semibold text-sm">⭐ Y lo más importante: la entenderán y sabrán cómo funciona.
+          </p>
+        </div>
+      </div>
+      <div class="lg:w-1/2 bg-ink rounded-2xl p-8 text-white text-center">
+        <div style="font-size:5rem;line-height:1;">🏗️</div>
+        <p class="font-display text-xl font-bold mt-4 mb-2">Grúa Robótica Funcional</p>
+        <p class="text-slate-400 text-sm">Con mando de control · Estructura real · Se lleva a casa</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KIT INCLUIDO ===== -->
+  <section class="py-20 px-6 bg-paper" id="materiales">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Material</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">Kit incluido</h2>
+        <p class="text-ink-soft mt-2">Todo el material está incluido en el precio — <strong>y se lo llevan a
+            casa</strong>.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div
+          class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-brand-blue hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-brand-blue text-2xl">smart_toy</span>
+          </div>
+          <p class="font-bold text-sm text-ink">2 servomotores</p>
+        </div>
+        <div
+          class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-brand-blue hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-brand-blue text-2xl">display_settings</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Controlador manual<br /><span class="font-normal text-ink-soft">(servo
+              tester)</span></p>
+        </div>
+        <div
+          class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-brand-blue hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-brand-blue text-2xl">toggle_on</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Conmutador</p>
+        </div>
+        <div
+          class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-brand-blue hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-brand-blue text-2xl">battery_charging_full</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Porta-pilas<br /><span class="font-normal text-ink-soft">con
+              interruptor</span></p>
+        </div>
+        <div
+          class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-brand-blue hover:shadow-md transition-all col-span-2 md:col-span-1">
+          <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-brand-blue text-2xl">construction</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Estructura<br /><span class="font-normal text-ink-soft">de madera</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CÓMO FUNCIONA ===== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Mecánica</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">¿Cómo funciona?</h2>
+      </div>
+      <div class="bg-ink rounded-2xl p-8 md:p-12 text-white">
+        <p class="text-slate-300 text-lg text-center mb-10">Los alumnos controlarán la grúa con un mando y usarán un
+          interruptor para elegir qué parte mover. Todo de forma <strong class="text-white">sencilla, visual y
+            práctica</strong>.</p>
+        <div class="flex flex-col md:flex-row gap-6 justify-center">
+          <div class="flex items-center gap-4 bg-white/10 rounded-xl p-5 flex-1">
+            <div class="step-circle">1</div>
+            <div>
+              <p class="font-bold text-white">Construcción paso a paso</p>
+              <p class="text-sm text-slate-400">Montan la estructura con guía del monitor</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 bg-white/10 rounded-xl p-5 flex-1">
+            <div class="step-circle">2</div>
+            <div>
+              <p class="font-bold text-white">Conexión de componentes</p>
+              <p class="text-sm text-slate-400">Cablear los motores y el mando de forma segura</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 bg-white/10 rounded-xl p-5 flex-1">
+            <div class="step-circle">3</div>
+            <div>
+              <p class="font-bold text-white">Pruebas y reto final</p>
+              <p class="text-sm text-slate-400">Prueban la grúa y superan el reto de la sesión</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUÉ DESARROLLA ===== -->
+  <section class="py-20 px-6 bg-paper">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Habilidades</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">¿Qué desarrolla este taller?</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200">
+          <div class="text-3xl mb-2">🧠</div>
+          <p class="font-bold text-sm">Pensamiento lógico</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200">
+          <div class="text-3xl mb-2">🎯</div>
+          <p class="font-bold text-sm">Concentración</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200">
+          <div class="text-3xl mb-2">🤲</div>
+          <p class="font-bold text-sm">Habilidad manual</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200">
+          <div class="text-3xl mb-2">💡</div>
+          <p class="font-bold text-sm">Resolución de problemas</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200 col-span-2 md:col-span-1">
+          <div class="text-3xl mb-2">⭐</div>
+          <p class="font-bold text-sm">Confianza en sí mismos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INFO DEL TALLER ===== -->
+  <section class="py-20 px-6 bg-ink text-white" id="horario">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+      <div class="md:w-1/2">
+        <span
+          class="inline-block bg-white/10 text-white/70 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">Información</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold mb-8">Información del taller</h2>
+        <div class="space-y-5">
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-brand-blue rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">calendar_month</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Cuándo</p>
+              <p class="font-bold text-lg">📅 Junio 2026</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-brand-blue rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">location_on</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Dónde</p>
+              <p class="font-bold text-lg">📍 Laboratorio de Innovación Tecnológica</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-brand-blue rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">child_care</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Edad</p>
+              <p class="font-bold text-lg">👦 8 a 11 años</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-brand-orange rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">warning</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Disponibilidad</p>
+              <p class="font-bold text-lg text-brand-yellow">👥 Plazas limitadas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md:w-1/2 w-full">
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-7 border border-white/10">
+          <h3 class="font-display text-xl font-bold mb-5">¿Cómo será la experiencia?</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]">1</div>
+              <div>
+                <p class="font-semibold">Construcción paso a paso</p>
+                <p class="text-sm text-slate-400">Con materiales reales y guía del monitor</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]">2</div>
+              <div>
+                <p class="font-semibold">Conexión de los componentes</p>
+                <p class="text-sm text-slate-400">Cableado seguro y comprensible</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]">3</div>
+              <div>
+                <p class="font-semibold">Pruebas reales</p>
+                <p class="text-sm text-slate-400">Comprueban que su grúa funciona de verdad</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]" style="background:#FFD600;color:#0f172a;">4</div>
+              <div>
+                <p class="font-semibold text-brand-yellow">Reto final con la grúa</p>
+                <p class="text-sm text-slate-400">Levantan objetos y demuestran lo aprendido</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OPINIONES ===== -->
+  <!-- <section class="py-20 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="section-label">Testimonios</span>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">Lo que dicen las familias</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="testimonial-card">
+        <div class="flex gap-1 mb-3">⭐⭐⭐⭐⭐</div>
+        <p class="text-ink-soft mb-4 italic">"A mi hijo le encantó. Salió súper motivado y no paró de contarme cómo funcionaba su grúa."</p>
+        <p class="font-bold text-sm text-ink">— Madre de alumno</p>
+      </div>
+      
+      <div class="testimonial-card border-dashed border-2 border-slate-200 flex flex-col items-center justify-center text-center py-10">
+        <div class="text-3xl mb-3">💬</div>
+        <p class="text-ink-soft text-sm font-medium">Añade aquí un testimonio real<br/>de una familia del taller</p>
+      </div>
+      <div class="testimonial-card border-dashed border-2 border-slate-200 flex flex-col items-center justify-center text-center py-10">
+        <div class="text-3xl mb-3">💬</div>
+        <p class="text-ink-soft text-sm font-medium">Añade aquí un testimonio real<br/>de una familia del taller</p>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+  <!-- ===== CTA CIERRE ===== -->
+  <section class="py-24 px-6 bg-brand-blue" id="registro">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="font-display text-4xl md:text-5xl font-extrabold text-white mb-4">¡Plazas muy limitadas!</h2>
+      <p class="text-blue-100 text-lg mb-8">Grupos reducidos para garantizar atención personalizada.<br />Reserva ahora
+        y asegura su plaza.</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="https://forms.gle" target="_blank"
+          class="bg-brand-yellow text-ink font-extrabold px-10 py-4 rounded-lg text-lg shadow-lg hover:bg-yellow-400 transition-all duration-200 flex items-center gap-2">
+          👉 Inscribirse ahora
+        </a>
+        <!-- <a href="#dudas" class="bg-white/15 text-white font-bold px-10 py-4 rounded-lg text-lg border border-white/30 hover:bg-white/25 transition-all duration-200 flex items-center gap-2">
+        👉 Consultar dudas
+      </a> -->
+      </div>
+      <p class="mt-8 text-blue-200 text-sm">📅 Junio 2026 · 📍 Laboratorio de Innovación Tecnológica · 👦 8–11 años</p>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-slate-950 border-t border-slate-800/50">
+    <div
+      class="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4 font-body text-xs">
+      <div class="text-lg font-bold text-indigo-300 font-headline">robotikSD</div>
+      <div class="text-slate-400 text-center">
+        <strong class="text-slate-300">Robótica &amp; Programación</strong> · Actividad Extraescolar<br />
+        <span class="text-slate-500">www.altaduna-saladares.com</span>
+      </div>
+      <div class="text-slate-600">© 2026 Academia Tecópolis. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+</body>
+
+</html>
