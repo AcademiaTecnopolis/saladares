@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Robótica, Programación y Nuevas Tecnologías | Colegio Saladares</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#002f33",
+                        "inverse-surface": "#d8e3fb",
+                        "on-tertiary-fixed": "#002022",
+                        "surface": "#081425",
+                        "tertiary-fixed-dim": "#00dbe9",
+                        "on-background": "#d8e3fb",
+                        "secondary-fixed-dim": "#ffb68b",
+                        "primary": "#b8c3ff",
+                        "outline-variant": "#414754",
+                        "on-secondary-container": "#602a00",
+                        "inverse-primary": "#124af0",
+                        "on-primary-fixed": "#001356",
+                        "on-surface": "#d8e3fb",
+                        "on-tertiary": "#00363a",
+                        "surface-container-low": "#111c2d",
+                        "secondary-container": "#ff7f1c",
+                        "surface-container-lowest": "#040e1f",
+                        "surface-container": "#152031",
+                        "on-secondary-fixed": "#321200",
+                        "on-primary-fixed-variant": "#0035be",
+                        "on-secondary": "#522300",
+                        "primary-container": "#6d88ff",
+                        "secondary": "#ffb68b",
+                        "surface-container-high": "#1f2a3c",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "inverse-on-surface": "#263143",
+                        "on-tertiary-fixed-variant": "#004f54",
+                        "primary-fixed": "#dde1ff",
+                        "on-secondary-fixed-variant": "#753400",
+                        "outline": "#8b90a0",
+                        "surface-tint": "#b8c3ff",
+                        "secondary-fixed": "#ffdbc8",
+                        "surface-variant": "#2a3548",
+                        "background": "#081425",
+                        "error": "#ffb4ab",
+                        "on-primary": "#002388",
+                        "tertiary-container": "#00a0aa",
+                        "tertiary-fixed": "#7df4ff",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#2a3548",
+                        "surface-dim": "#081425",
+                        "on-surface-variant": "#c1c6d7",
+                        "error-container": "#93000a",
+                        "tertiary": "#00dbe9",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#001e78",
+                        "surface-bright": "#2f3a4c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-primary { box-shadow: 0 0 20px rgba(184, 195, 255, 0.3); }
+        .grid-pattern {
+            background-image: radial-gradient(circle, #414754 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.1;
+        }
+
+        /* ── STATS STRIP ── */
+        .stats-strip {
+            background: linear-gradient(90deg, #6d88ff 0%, #b8c3ff 50%, #00dbe9 100%);
+            padding: 1.4rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        .stat-item { text-align: center; color: #081425; }
+        .stat-item strong {
+            display: block;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        .stat-item span { font-size: 0.85rem; font-weight: 600; opacity: 0.75; }
+
+        /* ── ACTIVITY CARDS ── */
+        .act-card {
+            background: linear-gradient(145deg, #111c2d, #152031);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(184,195,255,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .act-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .act-img-placeholder {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            flex-shrink: 0;
+        }
+        .bg-lego    { background: linear-gradient(135deg, #e53935 0%, #ff7043 100%); }
+        .bg-lego2   { background: linear-gradient(135deg, #f57f17 0%, #ffd600 100%); }
+        .bg-scratch { background: linear-gradient(135deg, #1565c0 0%, #00bcd4 100%); }
+        .bg-arduino { background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%); }
+        .bg-python  { background: linear-gradient(135deg, #4527a0 0%, #7c4dff 100%); }
+        .bg-ia      { background: linear-gradient(135deg, #ad1457 0%, #f06292 100%); }
+
+        .act-body {
+            padding: 1.5rem 1.6rem 1.8rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .act-age {
+            display: inline-block;
+            background: rgba(184,195,255,0.12);
+            color: #b8c3ff;
+            border: 1px solid rgba(184,195,255,0.25);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.25em 0.85em;
+            border-radius: 50px;
+            margin-bottom: 0.8rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .act-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.55rem;
+            color: #d8e3fb;
+        }
+        .act-desc {
+            color: #c1c6d7;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            flex: 1;
+        }
+        .act-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-top: 1.1rem;
+        }
+        .act-tag {
+            background: rgba(184,195,255,0.07);
+            border: 1px solid rgba(184,195,255,0.15);
+            border-radius: 6px;
+            font-size: 0.72rem;
+            padding: 0.22em 0.7em;
+            color: #b8c3ff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* ── WHY SECTION ── */
+        .why-block {
+            background: linear-gradient(145deg, #111c2d, #152031);
+            border-radius: 16px;
+            padding: 1.4rem;
+            border: 1px solid rgba(184,195,255,0.07);
+            text-align: center;
+            transition: transform 0.25s;
+        }
+        .why-block:hover { transform: scale(1.04); }
+        .why-block .icon { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .why-block h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: #d8e3fb;
+        }
+        .why-block p { font-size: 0.76rem; color: #8b90a0; }
+
+        .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; padding: 0; }
+        .benefit-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.93rem;
+            color: #c1c6d7;
+        }
+        .benefit-list li::before {
+            content: '✓';
+            flex-shrink: 0;
+            width: 22px; height: 22px;
+            background: linear-gradient(135deg, #6d88ff, #00dbe9);
+            color: #081425;
+            font-weight: 800;
+            font-size: 0.72rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── LEVEL TIMELINE ── */
+        .level-timeline {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            max-width: 750px;
+            margin-inline: auto;
+        }
+        .level-timeline::before {
+            content: '';
+            position: absolute;
+            left: 29px;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #6d88ff, #00dbe9);
+        }
+        .level-item {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            padding: 1.5rem 0;
+            position: relative;
+        }
+        .level-dot {
+            flex-shrink: 0;
+            width: 58px; height: 58px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .dot-red    { background: linear-gradient(135deg, #e53935, #ff7043); }
+        .dot-blue   { background: linear-gradient(135deg, #1565c0, #00bcd4); }
+        .dot-purple { background: linear-gradient(135deg, #4527a0, #7c4dff); }
+
+        .level-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+            color: #d8e3fb;
+        }
+        .level-content .ages {
+            font-size: 0.78rem;
+            color: #00dbe9;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.45rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .level-content p { font-size: 0.9rem; color: #8b90a0; line-height: 1.6; }
+
+        /* ── CTA glow btn pulse ── */
+        @keyframes ctaPulse {
+            0%,100% { box-shadow: 0 0 20px rgba(184,195,255,0.3); }
+            50%      { box-shadow: 0 0 45px rgba(184,195,255,0.55); }
+        }
+        .btn-cta-pulse { animation: ctaPulse 2.5s infinite; }
+
+        /* ── POPUP ANUNCIO ── */
+        #popup-anuncio {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: popupFadeIn 0.5s ease forwards;
+        }
+        #popup-anuncio.hide {
+            animation: popupFadeOut 0.6s ease forwards;
+        }
+        #popup-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(8, 20, 37, 0.82);
+            backdrop-filter: blur(6px);
+        }
+        #popup-box {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(145deg, #111c2d, #1f2a3c);
+            border: 1px solid rgba(184,195,255,0.2);
+            border-radius: 24px;
+            padding: 2.5rem 3rem;
+            max-width: 520px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 40px rgba(109,136,255,0.15);
+        }
+        #popup-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        #popup-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #d8e3fb;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+        #popup-title span { color: #00dbe9; }
+        #popup-bar-wrap {
+            margin-top: 1.8rem;
+            height: 4px;
+            background: rgba(184,195,255,0.12);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        #popup-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #6d88ff, #00dbe9);
+            border-radius: 9999px;
+            width: 100%;
+            animation: shrinkBar 5s linear forwards;
+        }
+        #popup-close {
+            position: absolute;
+            top: 1rem; right: 1.2rem;
+            background: none;
+            border: none;
+            color: #8b90a0;
+            font-size: 1.4rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        #popup-close:hover { color: #d8e3fb; }
+        @keyframes popupFadeIn {
+            from { opacity: 0; transform: scale(0.94); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+        @keyframes popupFadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to   { opacity: 0; transform: scale(0.94); pointer-events: none; }
+        }
+        @keyframes shrinkBar {
+            from { width: 100%; }
+            to   { width: 0%; }
+        }
+
+        /* ── ACT GRID ── */
+        .act-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+        }
+        @media (max-width: 640px) {
+            .act-grid { grid-template-columns: 1fr; }
+            .stats-strip { gap: 2rem; }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+
+<!-- ══ POPUP ANUNCIO ══ -->
+<div id="popup-anuncio" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <div id="popup-backdrop"></div>
+    <div id="popup-box">
+        <button id="popup-close" aria-label="Cerrar" onclick="closePopup()">✕</button>
+        <div id="popup-icon">🤖</div>
+        <p id="popup-title">
+            Curso 2026-27: <span>Robótica, Programación y Nuevas Tecnologías</span> en el Colegio Saladares.<br/>
+            ¡Preparamos a tus hijos para el futuro!
+        </p>
+        <div id="popup-bar-wrap"><div id="popup-bar"></div></div>
+    </div>
+</div>
+<script>
+    function closePopup() {
+        const p = document.getElementById('popup-anuncio');
+        p.classList.add('hide');
+        setTimeout(() => p.remove(), 600);
+    }
+    setTimeout(closePopup, 5000);
+</script>
+
+<!-- ══ NAV ══ -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl shadow-2xl shadow-indigo-500/10">
+    <div class="flex justify-between items-center px-8 py-3 max-w-7xl mx-auto">
+        <div class="text-xl font-bold text-indigo-300 tracking-tighter font-headline">
+            RobotikSD
+        </div>
+        <div class="hidden md:flex items-center gap-6 text-sm text-on-surface-variant font-label">
+            <a href="#actividades" class="hover:text-primary transition-colors">Actividades</a>
+            <a href="#por-que" class="hover:text-primary transition-colors">¿Por qué?</a>
+            <a href="#niveles" class="hover:text-primary transition-colors">Niveles</a>
+            <a href="proyectos.html" class="hover:text-primary transition-colors flex items-center gap-1 text-tertiary font-bold">
+                <span class="material-symbols-outlined" style="font-size:15px">science</span>
+                Proyectos
+            </a>
+        </div>
+        <a class="bg-primary-container text-on-primary-container px-5 py-2 rounded-lg font-bold scale-95 active:scale-90 transition-transform hover:bg-primary-container/90 font-label text-sm" href="#inscripcion">
+            Inscríbete Ya
+        </a>
+    </div>
+</nav>
+
+<main class="pt-16">
+
+   
+<!-- ══ HERO ══ -->
+<section class="relative min-h-[75vh] flex items-center overflow-hidden px-8">
+    <div class="absolute inset-0 grid-pattern pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
+        <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 border border-tertiary/20 text-tertiary text-xs font-label">
+                <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+                Actividad Extraescolar · Colegio Saladares · Curso 2026-2027
+            </div>
+            <h1 class="text-5xl md:text-6xl font-headline font-bold leading-[1] tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-on-surface via-primary to-tertiary">
+                Robótica, Programación<br/>&amp; Nuevas Tecnologías.
+            </h1>
+            <p class="text-lg text-on-surface-variant max-w-lg leading-relaxed">
+                Actividad extraescolar para alumnos de 7 a 16 años. Aprende construyendo, crea programando y descubre el poder de la Inteligencia Artificial. ¡Preparamos a tus hijos para los empleos del futuro!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-container text-on-primary-container text-base font-bold rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-2xl glow-primary font-label" href="#inscripcion">
+                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+                    Inscríbete Ahora
+                </a>
+                <a class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border border-tertiary/40 text-tertiary text-base font-bold hover:bg-tertiary/10 hover:border-tertiary/70 active:scale-95 transition-all font-label" href="proyectos.html">
+                    <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">science</span>
+                    Ver Proyectos
+                </a>
+            </div>
+        </div>
+
+        <div class="flex-1 grid grid-cols-2 gap-4">
+            <div class="space-y-4 pt-8">
+                <div class="rounded-2xl overflow-hidden h-48 border border-outline-variant shadow-xl">
+                    <img class="w-full h-full object-cover transition-all duration-500" src="img/img1.jpg" alt="Imagen 1">
+                </div>
+                <div class="rounded-2xl overflow-hidden h-64 border border-outline-variant shadow-xl">
+                    <img class="w-full h-full object-cover transition-all duration-500" src="img/img2.jpg" alt="Imagen 2">
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="rounded-2xl overflow-hidden h-64 border border-outline-variant shadow-xl">
+                    <img class="w-full h-full object-cover transition-all duration-500" src="img/img3.jpg" alt="Imagen 3">
+                </div>
+                <div class="rounded-2xl overflow-hidden h-48 border border-outline-variant shadow-xl">
+                    <img class="w-full h-full object-cover transition-all duration-500" src="img/img4.jpg" alt="Imagen 4">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- ══ LABORATORIO INTRO ══ -->
+    <section class="py-16 px-8 bg-surface-container-lowest text-center">
+        <div class="max-w-3xl mx-auto space-y-4">
+            <h2 class="text-4xl md:text-5xl font-headline font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary via-tertiary to-secondary">
+                Construye. Programa. Crea con IA.
+            </h2>
+            <p class="text-lg text-on-surface-variant leading-relaxed">
+                Entra en nuestro laboratorio de innovación tecnológica donde la imaginación se une a la ingeniería. Desde robótica con Lego hasta Inteligencia Artificial, Visión Artificial e IoT. Convertimos a los alumnos en creadores del futuro.
+            </p>
+        </div>
+    </section>
+
+    <!-- ══ STATS STRIP ══ -->
+    <div class="stats-strip">
+        <div class="stat-item"><strong>4</strong><span>Niveles</span></div>
+        <div class="stat-item"><strong>6+</strong><span>Tecnologías</span></div>
+        <div class="stat-item"><strong>7–16</strong><span>Años</span></div>
+        <div class="stat-item"><strong>100%</strong><span>Práctico</span></div>
+    </div>
+
+    <!-- ══ ACTIVIDADES ══ -->
+    <section class="py-20 px-8 bg-surface-container-lowest" id="actividades">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-14">
+                <p class="text-xs font-label font-bold tracking-widest uppercase text-tertiary mb-2">¿Qué aprendemos?</p>
+                <h2 class="text-4xl font-headline font-bold tracking-tight mb-3">Nuestras Actividades</h2>
+                <p class="text-on-surface-variant max-w-xl mx-auto leading-relaxed">Proyectos reales con tecnología de vanguardia. Cada sesión es una nueva aventura tecnológica con herramientas profesionales.</p>
+            </div>
+
+            <div class="act-grid">
+
+                <!-- Lego WeDo -->
+                <div class="act-card">
+                    <div class="act-img-placeholder bg-lego">🤖</div>
+                    <div class="act-body">
+                        <span class="act-age">PEP4–PEP5 · 7–8 años</span>
+                        <h3 class="act-title">Robótica Iniciación</h3>
+                        <p class="act-desc">Construcción de modelos temáticos con Lego WeDo 2.0. Los alumnos programan por bloques trabajando secuencias. Misiones gamificadas con retos de equipo.</p>
+                        <div class="act-tags">
+                            <span class="act-tag">🧱 Lego WeDo</span>
+                            <span class="act-tag">⚙️ Mecánica</span>
+                            <span class="act-tag">🎮 Gamificación</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lego EV3 / Máquinas -->
+                <div class="act-card">
+                    <div class="act-img-placeholder bg-lego2">🔧</div>
+                    <div class="act-body">
+                        <span class="act-age">PEP6–PEP7 · 8–9 años</span>
+                        <h3 class="act-title">Robótica 1 + Programación 1 (Inicial)</h3>
+                        <p class="act-desc">Robótica: Lego Máquinas Simples (palancas, poleas, engranajes). Programación: Animaciones, videojuegos e historias interactivas con Scratch. Introducción a la electrónica, actuadores y sensores con mBblock</p>
+                        <div class="act-tags">
+                            <span class="act-tag">⚙️ Lego 9886</span>
+                            <span class="act-tag">😺 Scratch</span>
+                            <span class="act-tag">🔌 Arduino mBlock</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scratch + Arduino -->
+                <div class="act-card">
+                    <div class="act-img-placeholder bg-scratch">🐱</div>
+                    <div class="act-body">
+                        <span class="act-age">PEP8–PEP9 · 10–11 años</span>
+                        <h3 class="act-title">Robótica 2 + Programación 2 (Inicial)</h3>
+                        <p class="act-desc">Robótica: Robot EV3 programable con sensores de color, ultrasonido y tacto. Retos de ingeniería: puentes, grúas y mecanismos. Programación: Creamos videojuegos completos, animaciones e historias interactivas con Scratch. Con Arduino y mBlock conectamos el mundo físico: LEDs, motores, sensores de temperatura, luz y ultrasonido. Integración robótica–programación.</p>
+                        <div class="act-tags">
+                            <span class="act-tag">🎮 Videojuegos</span>
+                            <span class="act-tag">🔬 Ingeniería mBlock</span>
+                            <span class="act-tag">💡 Lógica</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lego EV3 Avanzado -->
+                <div class="act-card">
+                    <div class="act-img-placeholder bg-arduino">⚡</div>
+                    <div class="act-body">
+                        <span class="act-age">PAI 1–4 · 12–16 años</span>
+                        <h3 class="act-title">Robótica Avanzada — EV3</h3>
+                        <p class="act-desc">Robot autónomo con navegación por laberinto y evitación de obstáculos. Spike Prime con motores angulares y sensores de fuerza. Algoritmos avanzados de seguimiento de línea y PID básico. Competiciones internas tipo FLL.</p>
+                        <div class="act-tags">
+                            <span class="act-tag">🤖 EV3 Avanzado</span>
+                            <span class="act-tag">🏆 Competiciones FLL</span>
+                            <span class="act-tag">📡 Sensores avanzados</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Python / HTML / IoT -->
+                <div class="act-card">
+                    <div class="act-img-placeholder bg-python">🐍</div>
+                    <div class="act-body">
+                        <span class="act-age">PAI 1–4 · 12–16 años</span>
+                        <h3 class="act-title">Python, Web &amp; IoT con ESP32</h3>
+                        <p class="act-desc">HTML5, CSS3 y JavaScript para crear sitios web propios. Python avanzado con APIs y librerías. Microcontrolador ESP32 para proyectos IoT reales: estación meteorológica, domótica, riego inteligente y monitor de calidad del aire.</p>
+                        <div class="act-tags">
+                            <span class="act-tag">🌐 HTML/CSS/JS</span>
+                            <span class="act-tag">🐍 Python</span>
+                            <span class="act-tag">📡 IoT ESP32</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IA -->
+                <div class="act-card">
+                    <div class="act-img-placeholder bg-ia">🧠</div>
+                    <div class="act-body">
+                        <span class="act-age">PAI 1–4 · 12–16 años</span>
+                        <h3 class="act-title">Inteligencia Artificial &amp; Visión Artificial</h3>
+                        <p class="act-desc">Machine Learning, OpenCV para detección de objetos y rostros, y redes neuronales con TensorFlow/Keras. Uso ético de Claude/ChatGPT y GitHub Copilot. Proyecto final: aplicación real con reconocimiento visual presentada ante familias.</p>
+                        <div class="act-tags">
+                            <span class="act-tag">🤖 Machine Learning</span>
+                            <span class="act-tag">👁️ OpenCV</span>
+                            <span class="act-tag">🧠 TensorFlow</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ EL CÓDIGO TRAS LA MAGIA ══ -->
+    <section class="py-16 px-8 bg-surface-container-lowest overflow-hidden">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
+            <div class="flex-1 space-y-6">
+                <h2 class="text-4xl font-headline font-bold tracking-tight">El Código tras <span class="text-tertiary">la Magia.</span></h2>
+                <p class="text-base text-on-surface-variant">No solo enseñamos sintaxis; enseñamos a resolver problemas y a interactuar con el mundo físico.</p>
+                <div class="p-5 bg-slate-900 rounded-xl border border-outline-variant/30 font-mono text-xs leading-relaxed shadow-2xl">
+                    <div class="flex gap-2 mb-3">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                    </div>
+                    <div class="text-primary-fixed-dim">while</div> <span class="text-on-surface">(robot.activo):</span><br/>
+                    &nbsp;&nbsp;<span class="text-tertiary">datos_sensor</span> = robot.leer_ultrasonico()<br/>
+                    &nbsp;&nbsp;<span class="text-primary-fixed-dim">if</span> <span class="text-on-surface">datos_sensor &lt; 20:</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;robot.detener_y_evitar()<br/>
+                    &nbsp;&nbsp;<span class="text-primary-fixed-dim">else</span>:<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;robot.avanzar(<span class="text-secondary">velocidad=100</span>)
+                </div>
+            </div>
+            <div class="flex-1 grid grid-cols-2 gap-4">
+                <div class="space-y-4 pt-8">
+                    <div class="rounded-2xl overflow-hidden h-48 border border-outline-variant shadow-xl">
+                        <img class="w-full h-full object-cover transition-all duration-500" src="img/img5.jpg" alt="Imagen 5">   
+                    </div>
+                    <div class="rounded-2xl overflow-hidden h-40 border border-outline-variant shadow-xl">
+                        <img class="w-full h-full object-cover transition-all duration-500" src="img/img6.jpg" alt="Imagen 6">       
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="rounded-2xl overflow-hidden h-40 border border-outline-variant shadow-xl">
+                        <img class="w-full h-full object-cover transition-all duration-500" src="img/img7.png" alt="Imagen 7">          
+                    </div>
+                    <div class="rounded-2xl overflow-hidden h-48 border border-outline-variant shadow-xl">
+                        <img class="w-full h-full object-cover transition-all duration-500" src="img/img8.jpg" alt="Imagen 8">          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ POR QUÉ ══ -->
+    <section class="py-20 px-8 bg-surface" id="por-que">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                <!-- Grid de beneficios visuales -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div class="why-block">
+                        <div class="icon">🧩</div>
+                        <h4>Pensamiento computacional</h4>
+                        <p>Lógica, abstracción y resolución de problemas</p>
+                    </div>
+                    <div class="why-block">
+                        <div class="icon">🎯</div>
+                        <h4>Aprendizaje por proyectos</h4>
+                        <p>Cada sesión termina con algo tangible y real</p>
+                    </div>
+                    <div class="why-block">
+                        <div class="icon">🤝</div>
+                        <h4>Trabajo en equipo</h4>
+                        <p>Roles reales: diseñador, programador, tester</p>
+                    </div>
+                    <div class="why-block">
+                        <div class="icon">🚀</div>
+                        <h4>Empleabilidad futura</h4>
+                        <p>3x mayor con habilidades STEM</p>
+                    </div>
+                    <div class="why-block">
+                        <div class="icon">💡</div>
+                        <h4>Creatividad digital</h4>
+                        <p>De la idea al prototipo funcional</p>
+                    </div>
+                    <div class="why-block">
+                        <div class="icon">🏆</div>
+                        <h4>Portfolio propio</h4>
+                        <p>Apps, robots y webs para bachillerato</p>
+                    </div>
+                </div>
+
+                <!-- Texto + lista -->
+                <div class="space-y-6">
+                    <p class="text-xs font-label font-bold tracking-widest uppercase text-tertiary">¿Por qué apuntarles?</p>
+                    <h2 class="text-4xl font-headline font-bold tracking-tight leading-tight">Les preparamos para el mundo que viene</h2>
+                    <p class="text-on-surface-variant leading-relaxed">La programación ya no es solo para ingenieros — es una competencia transversal como leer y escribir. La IA elimina la barrera técnica de entrada, permitiendo que cualquier alumno pueda crear desde el primer día.</p>
+                    <ul class="benefit-list">
+                        <li>Competencia digital avanzada y diferenciadora</li>
+                        <li>Grupos reducidos de 10–15 alumnos con atención personalizada</li>
+                        <li>Itinerario progresivo de 4 niveles adaptado por edad</li>
+                        <li>Herramientas reales: Lego EV3, Arduino, Python, IA</li>
+                        <li>Uso ético y crítico de la IA — no dependencia ciega</li>
+                        <li>Alineación con la estrategia digital europea DigComp</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ NIVELES ══ -->
+    <section class="py-20 px-8 bg-surface-container-lowest" id="niveles">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-14">
+                <p class="text-xs font-label font-bold tracking-widest uppercase text-tertiary mb-2">Itinerario formativo</p>
+                <h2 class="text-4xl font-headline font-bold tracking-tight mb-3">Cuatro Niveles, Un Futuro</h2>
+                <p class="text-on-surface-variant max-w-xl mx-auto leading-relaxed">Cada alumno entra en el nivel que le corresponde por edad y avanza a su propio ritmo. Sesiones de 50 min, 2 veces por semana.</p>
+            </div>
+
+            <div class="level-timeline">
+
+                <div class="level-item">
+                    <div class="level-dot dot-red">🏗️</div>
+                    <div class="level-content pt-2">
+                        <div class="ages">PEP4–PEP5 · 7–8 años</div>
+                        <h3>Nivel 1 — Robótica Iniciación</h3>
+                        <p>Lego WeDo 2.0 y Gamificación. Construcción de modelos temáticos y gamificación educativa. Pensamiento computacional desde los 7 años.</p>
+                    </div>
+                </div>
+
+                <div class="level-item">
+                    <div class="level-dot dot-blue">⚡</div>
+                    <div class="level-content pt-2">
+                        <div class="ages">PEP6–PEP7 · 8–9 años</div>
+                        <h3>Nivel 2 — Robótica 1 / Programación 1 (Inicial)</h3>
+                        <p>Lego 9886 + Máquinas Simples / Programación: Scratch y mBlock. Proyectos de animación y videojuegos, control de hardware y retos de ingeniería.</p>
+                    </div>
+                </div>
+
+                <div class="level-item">
+                    <div class="level-dot dot-purple">🧠</div>
+                    <div class="level-content pt-2">
+                        <div class="ages">PEP8–PEP9 · 10–11 años</div>
+                        <h3>Nivel 3 — Robótica 2 / Programación 2 (Medio)</h3>
+                        <p>Lego EV3 autónomo y navegación por laberintos, algoritmos PID básico y competiciones internas tipo World Robot Olympiad / Programación: Scratch y mBlock avanzado con Arduino.</p>
+                    </div>
+                </div>
+
+                <div class="level-item">
+                    <div class="level-dot" style="background: linear-gradient(135deg, #ad1457, #f06292);">🚀</div>
+                    <div class="level-content pt-2">
+                        <div class="ages">PAI 1–4 · 12–16 años</div>
+                        <h3>Nivel 4 — Robótica avanzada / Programación Avanzada e IA</h3>
+                        <p>Ingeniería de Diseño de Robots de Competición / Programación: Python, HTML/CSS/JS, IoT con ESP32, Machine Learning, OpenCV y TensorFlow. Proyectos reales con IA integrada y presentación pública ante familias y el centro. ¡El techo lo ponen ellos!</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ CTA INSCRIPCION ══ -->
+    <section class="py-24 px-8 relative overflow-hidden text-center" id="inscripcion">
+        <div class="max-w-3xl mx-auto space-y-8 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-headline font-bold tracking-tighter">¿Listo para <span class="text-secondary">liderar el cambio?</span></h2>
+            <p class="text-lg text-on-surface-variant max-w-lg mx-auto leading-relaxed">Las plazas son limitadas (grupos de 10–15 alumnos). Reserva ahora el sitio de tu hijo y súmate a la actividad extraescolar más innovadora del Colegio Saladares.</p>
+            <div class="pt-4 space-y-4">
+                <a class="inline-block px-12 py-6 bg-primary-container text-on-primary-container text-xl font-bold rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-2xl btn-cta-pulse font-label" href="https://forms.google.com" target="_blank">
+                    🚀 INSCRIBIRSE AHORA
+                </a>
+                <p class="text-xs text-on-surface-variant/50">Al hacer clic serás redirigido al formulario de inscripción oficial</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer class="bg-slate-950 border-t border-slate-800/50">
+    <div class="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4 font-body text-xs">
+        <div class="flex flex-col items-center md:items-start gap-1"><div class="text-lg font-bold text-indigo-300 font-headline">RobotikSD</div><a href="proyectos.html" class="text-slate-500 hover:text-tertiary transition-colors flex items-center gap-1 text-xs"><span class="material-symbols-outlined" style="font-size:12px">science</span>Proyectos del Aula</a></div>
+        <div class="text-slate-400 text-center">
+            <strong class="text-slate-300">Robótica, Programación &amp; Nuevas Tecnologías</strong> · Actividad Extraescolar · Curso 2026-2027<br/>
+            <span class="text-slate-500"><a href="https://attendis.com/colegios-almeria/saladares/" target="_blank" rel="noopener noreferrer">www.altaduna-saladares.com</a></span>
+        </div>
+        <div class="text-slate-600">© 2026 <a href="http://academiatecnopolis.com" target="_blank" rel="noopener noreferrer">Academia Tecnópolis</a>. Todos los derechos reservados.</div>
+    </div>
+</footer>
+
+</body>
+</html>
