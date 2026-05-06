@@ -1,0 +1,42 @@
+# ══════════════════════════════════════════════════════════════
+#  netlify.toml — Configuración de Netlify
+#  RobotikSD · Colegio Saladares
+# ══════════════════════════════════════════════════════════════
+
+[build]
+  # Comando que se ejecuta antes de publicar:
+  # 1. Instala gray-matter  2. Ejecuta el builder  3. Lista los archivos
+  command = "npm install gray-matter && node build.js"
+
+  # Carpeta raíz del sitio (toda la web va a la raíz)
+  publish = "."
+
+# ── Redirecciones para el CMS ─────────────────────────────────
+# Sin esto Netlify Identity y Git Gateway no funcionan
+[[redirects]]
+  from = "/admin"
+  to   = "/admin/index.html"
+  status = 200
+
+# ── Cabeceras de seguridad y caché ───────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/media/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/data.json"
+  [headers.values]
+    Cache-Control = "no-cache"   # Siempre fresco tras nuevo deploy
+
+# ── Netlify Identity ─────────────────────────────────────────
+# Activa Identity y Git Gateway desde el panel de Netlify:
+# Site Settings → Identity → Enable
+# Site Settings → Identity → Services → Git Gateway → Enable

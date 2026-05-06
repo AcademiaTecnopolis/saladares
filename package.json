@@ -1,0 +1,19 @@
+{
+  "name": "robotiksd-proyectos",
+  "version": "1.0.0",
+  "description": "Web de proyectos del aula - RobotikSD · Colegio Saladares",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "npx decap-server & npx serve . -p 3000",
+    "cms-local": "npx decap-server"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "decap-server": "^3.0.0",
+    "serve": "^14.2.0"
+  },
+  "keywords": ["robotica", "educacion", "cms", "decap"],
+  "license": "MIT"
+}

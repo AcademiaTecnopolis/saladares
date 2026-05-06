@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Proyectos del Aula | RobotikSD · Colegio Saladares</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#002f33",
+            "inverse-surface": "#d8e3fb",
+            "surface": "#081425",
+            "tertiary-fixed-dim": "#00dbe9",
+            "on-background": "#d8e3fb",
+            "secondary-fixed-dim": "#ffb68b",
+            "primary": "#b8c3ff",
+            "outline-variant": "#414754",
+            "on-secondary-container": "#602a00",
+            "inverse-primary": "#124af0",
+            "on-surface": "#d8e3fb",
+            "on-tertiary": "#00363a",
+            "surface-container-low": "#111c2d",
+            "secondary-container": "#ff7f1c",
+            "surface-container-lowest": "#040e1f",
+            "surface-container": "#152031",
+            "on-secondary": "#522300",
+            "primary-container": "#6d88ff",
+            "secondary": "#ffb68b",
+            "surface-container-high": "#1f2a3c",
+            "primary-fixed-dim": "#b8c3ff",
+            "primary-fixed": "#dde1ff",
+            "outline": "#8b90a0",
+            "surface-variant": "#2a3548",
+            "background": "#081425",
+            "error": "#ffb4ab",
+            "on-primary": "#002388",
+            "tertiary-container": "#00a0aa",
+            "tertiary-fixed": "#7df4ff",
+            "on-error": "#690005",
+            "surface-container-highest": "#2a3548",
+            "surface-dim": "#081425",
+            "on-surface-variant": "#c1c6d7",
+            "tertiary": "#00dbe9",
+            "surface-bright": "#2f3a4c"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Space Grotesk"],
+            "body": ["Manrope"],
+            "label": ["Plus Jakarta Sans"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ══ SHARED GLOBALS ══ */
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .grid-pattern {
+      background-image: radial-gradient(circle, #414754 1px, transparent 1px);
+      background-size: 30px 30px; opacity: 0.1;
+    }
+    .glow-primary { box-shadow: 0 0 20px rgba(184, 195, 255, 0.3); }
+
+    /* ══ FILTER TABS ══ */
+    .filter-btn {
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid rgba(184,195,255,0.2);
+      color: #8b90a0;
+      background: rgba(184,195,255,0.05);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { color: #b8c3ff; border-color: rgba(184,195,255,0.4); }
+    .filter-btn.active {
+      background: linear-gradient(135deg, #6d88ff, #b8c3ff);
+      color: #001e78;
+      border-color: transparent;
+    }
+
+    /* ══ PROJECT CARDS ══ */
+    .proj-card {
+      background: linear-gradient(145deg, #111c2d, #152031);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(184,195,255,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .proj-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(109,136,255,0.1);
+    }
+    .proj-thumb {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+    .proj-thumb-placeholder {
+      width: 100%; height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; flex-shrink: 0;
+      background: linear-gradient(135deg, #111c2d, #1f2a3c);
+    }
+    .proj-body { padding: 1.4rem 1.5rem 1.6rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+    .proj-cat {
+      display: inline-block;
+      background: rgba(0,219,233,0.12);
+      color: #00dbe9;
+      border: 1px solid rgba(0,219,233,0.25);
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.22em 0.85em; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      align-self: flex-start;
+    }
+    .proj-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem; font-weight: 700; color: #d8e3fb; line-height: 1.3;
+    }
+    .proj-desc { color: #8b90a0; font-size: 0.875rem; line-height: 1.6; flex: 1; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+    .proj-tag {
+      background: rgba(184,195,255,0.07);
+      border: 1px solid rgba(184,195,255,0.15);
+      border-radius: 6px;
+      font-size: 0.7rem; padding: 0.2em 0.65em;
+      color: #b8c3ff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .proj-icons { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+    .proj-icon-badge {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.72rem; color: #8b90a0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .proj-icon-badge .material-symbols-outlined { font-size: 14px; }
+
+    /* ══ MEDIA SECTION ══ */
+    .media-tab-btn {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.85rem; font-weight: 700;
+      border: 1px solid rgba(184,195,255,0.12);
+      color: #8b90a0;
+      background: rgba(184,195,255,0.04);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .media-tab-btn:hover { color: #b8c3ff; }
+    .media-tab-btn.active {
+      background: rgba(184,195,255,0.1);
+      border-color: rgba(184,195,255,0.3);
+      color: #d8e3fb;
+    }
+    .media-tab-btn .material-symbols-outlined { font-size: 18px; }
+
+    /* ══ VIDEO GRID ══ */
+    .video-card {
+      background: linear-gradient(145deg, #111c2d, #152031);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(184,195,255,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .video-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+    .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-info { padding: 1rem 1.2rem 1.3rem; }
+    .video-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; color: #d8e3fb; margin-bottom: 0.25rem; }
+    .video-desc { font-size: 0.8rem; color: #8b90a0; }
+
+    /* ══ IMAGE GALLERY ══ */
+    .gallery-grid {
+      columns: 3; gap: 1rem;
+    }
+    @media (max-width: 768px) { .gallery-grid { columns: 2; } }
+    @media (max-width: 480px) { .gallery-grid { columns: 1; } }
+    .gallery-item {
+      break-inside: avoid; margin-bottom: 1rem;
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(184,195,255,0.08);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .gallery-item:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+    .gallery-item img { width: 100%; display: block; }
+
+    /* ══ PDF CARDS ══ */
+    .pdf-card {
+      display: flex; align-items: center; gap: 1rem;
+      background: linear-gradient(145deg, #111c2d, #152031);
+      border-radius: 14px; padding: 1.2rem 1.4rem;
+      border: 1px solid rgba(184,195,255,0.08);
+      transition: transform 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+    .pdf-card:hover { transform: translateX(4px); border-color: rgba(184,195,255,0.25); }
+    .pdf-icon {
+      width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, #e53935, #ff7043);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pdf-icon .material-symbols-outlined { color: white; font-size: 22px; }
+    .pdf-meta { flex: 1; }
+    .pdf-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; color: #d8e3fb; }
+    .pdf-size { font-size: 0.78rem; color: #8b90a0; margin-top: 0.15rem; }
+    .pdf-dl .material-symbols-outlined { color: #b8c3ff; font-size: 20px; }
+
+    /* ══ LIGHTBOX ══ */
+    #lightbox {
+      position: fixed; inset: 0; z-index: 9990;
+      background: rgba(8,20,37,0.95); backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    #lightbox.open { opacity: 1; pointer-events: all; }
+    #lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 12px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+    #lb-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: rgba(184,195,255,0.1); border: 1px solid rgba(184,195,255,0.2);
+      color: #d8e3fb; border-radius: 50%; width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.2rem; transition: background 0.2s;
+    }
+    #lb-close:hover { background: rgba(184,195,255,0.2); }
+
+    /* ══ EMPTY STATE ══ */
+    .empty-state {
+      text-align: center; padding: 4rem 2rem;
+      color: #414754; font-family: 'Space Grotesk', sans-serif;
+    }
+    .empty-state .icon { font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.4; }
+    .empty-state p { font-size: 0.95rem; color: #8b90a0; }
+
+    /* ══ HERO BADGE ANIM ══ */
+    @keyframes pulse-badge {
+      0%,100% { box-shadow: 0 0 0 0 rgba(0,219,233,0.3); }
+      50%      { box-shadow: 0 0 0 8px rgba(0,219,233,0); }
+    }
+    .badge-pulse { animation: pulse-badge 2.5s infinite; }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+
+<!-- ══ NAV ══ -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-filter backdrop-blur-xl shadow-2xl" style="box-shadow: 0 2px 30px rgba(109,136,255,0.1)">
+  <div class="flex justify-between items-center px-8 py-3 max-w-7xl mx-auto">
+    <a href="index.html" class="text-xl font-bold text-indigo-300 tracking-tighter font-headline hover:text-primary transition-colors">
+      RobotikSD
+    </a>
+    <div class="hidden md:flex items-center gap-6 text-sm text-on-surface-variant font-label">
+      <a href="index.html" class="hover:text-primary transition-colors flex items-center gap-1">
+        <span class="material-symbols-outlined" style="font-size:16px">arrow_back</span>
+        Inicio
+      </a>
+      <a href="#proyectos" class="hover:text-primary transition-colors">Proyectos</a>
+      <a href="#galeria" class="hover:text-primary transition-colors">Galería</a>
+      <a href="#recursos" class="hover:text-primary transition-colors">Recursos</a>
+    </div>
+    <a class="bg-primary-container text-on-primary-container px-5 py-2 rounded-lg font-bold scale-95 active:scale-90 transition-transform hover:bg-primary-container/90 font-label text-sm" href="index.html#inscripcion">
+      Inscríbete Ya
+    </a>
+  </div>
+</nav>
+
+<main class="pt-16">
+
+<!-- ══ HERO ══ -->
+<section class="relative py-20 px-8 overflow-hidden" id="hero">
+  <div class="absolute inset-0 grid-pattern pointer-events-none"></div>
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(109,136,255,0.12) 0%, transparent 70%)"></div>
+  <div class="max-w-7xl mx-auto relative z-10 text-center space-y-6">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 border border-tertiary/20 text-tertiary text-xs font-label badge-pulse">
+      <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1; font-size:14px">science</span>
+      Proyectos del Aula · Colegio Saladares · Curso 2026-2027
+    </div>
+    <h1 class="text-5xl md:text-6xl font-headline font-bold tracking-tighter leading-none text-transparent bg-clip-text bg-gradient-to-br from-on-surface via-primary to-tertiary">
+      Proyectos del Aula
+    </h1>
+    <p class="text-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+      Descubre todo lo que han construido, programado y creado nuestros alumnos. Vídeos, imágenes y documentos de cada proyecto real realizado en clase.
+    </p>
+    <div class="flex justify-center gap-6 pt-2 flex-wrap">
+      <div class="text-center">
+        <div id="stat-proyectos" class="text-3xl font-headline font-black text-primary">—</div>
+        <div class="text-xs text-on-surface-variant font-label uppercase tracking-widest">Proyectos</div>
+      </div>
+      <div class="w-px bg-outline-variant hidden md:block"></div>
+      <div class="text-center">
+        <div id="stat-videos" class="text-3xl font-headline font-black text-tertiary">—</div>
+        <div class="text-xs text-on-surface-variant font-label uppercase tracking-widest">Vídeos</div>
+      </div>
+      <div class="w-px bg-outline-variant hidden md:block"></div>
+      <div class="text-center">
+        <div id="stat-fotos" class="text-3xl font-headline font-black text-secondary">—</div>
+        <div class="text-xs text-on-surface-variant font-label uppercase tracking-widest">Fotos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FILTER BAR ══ -->
+<section class="sticky top-16 z-40 bg-surface/90 backdrop-filter backdrop-blur-xl border-b border-outline-variant/30 px-8 py-3">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex gap-2 overflow-x-auto pb-1" id="filter-bar" style="scrollbar-width: none">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="robotica">🤖 Robótica</button>
+      <button class="filter-btn" data-filter="scratch">🎮 Scratch</button>
+      <button class="filter-btn" data-filter="arduino">⚡ Arduino</button>
+      <button class="filter-btn" data-filter="python">🐍 Python</button>
+      <button class="filter-btn" data-filter="ia">🧠 IA</button>
+      <button class="filter-btn" data-filter="web">🌐 Web</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROYECTOS GRID ══ -->
+<section class="py-16 px-8 bg-surface-container-lowest" id="proyectos">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <p class="text-xs font-label font-bold tracking-widest uppercase text-tertiary mb-2">Lo que hemos creado</p>
+      <h2 class="text-4xl font-headline font-bold tracking-tight">Nuestros Proyectos</h2>
+    </div>
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Rendered by JS from content/proyectos/ -->
+    </div>
+    <div id="projects-empty" class="empty-state hidden">
+      <div class="icon">🔍</div>
+      <h3 class="font-headline font-bold text-lg text-on-surface-variant mb-1">Sin proyectos en esta categoría</h3>
+      <p>Prueba con otro filtro o vuelve pronto — ¡estamos trabajando en ello!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MEDIA SECTION ══ -->
+<section class="py-16 px-8 bg-surface" id="galeria">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10">
+      <p class="text-xs font-label font-bold tracking-widest uppercase text-tertiary mb-2">Multimedia</p>
+      <h2 class="text-4xl font-headline font-bold tracking-tight">Galería y Recursos</h2>
+    </div>
+
+    <!-- Tab Switcher -->
+    <div class="flex gap-3 justify-center mb-10 flex-wrap" id="media-tabs">
+      <button class="media-tab-btn active" data-tab="videos">
+        <span class="material-symbols-outlined">smart_display</span> Vídeos
+      </button>
+      <button class="media-tab-btn" data-tab="fotos">
+        <span class="material-symbols-outlined">photo_library</span> Fotos
+      </button>
+      <button class="media-tab-btn" data-tab="pdfs" id="tab-pdfs">
+        <span class="material-symbols-outlined">picture_as_pdf</span> Documentos PDF
+      </button>
+    </div>
+
+    <!-- Videos Panel -->
+    <div id="panel-videos" class="media-panel">
+      <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered by JS -->
+      </div>
+      <div id="videos-empty" class="empty-state hidden">
+        <div class="icon">🎬</div>
+        <h3 class="font-headline font-bold text-lg text-on-surface-variant mb-1">Próximamente</h3>
+        <p>Los vídeos de nuestros proyectos aparecerán aquí.</p>
+      </div>
+    </div>
+
+    <!-- Fotos Panel -->
+    <div id="panel-fotos" class="media-panel hidden">
+      <div id="gallery-grid" class="gallery-grid">
+        <!-- Rendered by JS -->
+      </div>
+      <div id="gallery-empty" class="empty-state hidden">
+        <div class="icon">📷</div>
+        <h3 class="font-headline font-bold text-lg text-on-surface-variant mb-1">Próximamente</h3>
+        <p>Las fotos de nuestras sesiones aparecerán aquí.</p>
+      </div>
+    </div>
+
+    <!-- PDFs Panel -->
+    <div id="panel-pdfs" class="media-panel hidden" id="recursos">
+      <div id="pdfs-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+        <!-- Rendered by JS -->
+      </div>
+      <div id="pdfs-empty" class="empty-state hidden">
+        <div class="icon">📄</div>
+        <h3 class="font-headline font-bold text-lg text-on-surface-variant mb-1">Sin documentos aún</h3>
+        <p>Los recursos PDF se publicarán aquí cuando estén disponibles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA FOOTER ══ -->
+<section class="py-20 px-8 text-center" style="background: linear-gradient(135deg, #040e1f 0%, #0d1b30 100%)">
+  <div class="max-w-2xl mx-auto space-y-5">
+    <h2 class="text-3xl md:text-4xl font-headline font-bold tracking-tighter">
+      ¿Quieres que tu hijo <span class="text-secondary">cree el próximo proyecto?</span>
+    </h2>
+    <p class="text-on-surface-variant leading-relaxed">Plazas limitadas para el curso 2026-2027. ¡Únete a la actividad extraescolar más innovadora del Colegio Saladares!</p>
+    <a class="inline-block px-10 py-5 bg-primary-container text-on-primary-container text-lg font-bold rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-2xl glow-primary font-label" href="index.html#inscripcion">
+      🚀 Inscríbete Ahora
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer class="bg-slate-950 border-t border-slate-800/50">
+  <div class="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4 font-body text-xs">
+    <div class="text-lg font-bold text-indigo-300 font-headline">RobotikSD</div>
+    <div class="text-slate-400 text-center">
+      <strong class="text-slate-300">Robótica, Programación &amp; Nuevas Tecnologías</strong> · Actividad Extraescolar · Curso 2026-2027<br/>
+      <span class="text-slate-500"><a href="https://attendis.com/colegios-almeria/saladares/" target="_blank" rel="noopener noreferrer">www.altaduna-saladares.com</a></span>
+    </div>
+    <div class="text-slate-600">© 2026 <a href="http://academiatecnopolis.com" target="_blank" rel="noopener noreferrer">Academia Tecnópolis</a>. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<!-- ══ LIGHTBOX ══ -->
+<div id="lightbox">
+  <button id="lb-close" onclick="closeLightbox()">✕</button>
+  <img id="lb-img" src="" alt=""/>
+</div>
+
+<script src="js/proyectos.js"></script>
+</body>
+</html>

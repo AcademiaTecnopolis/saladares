@@ -1,0 +1,179 @@
+# ══════════════════════════════════════════════════════════════
+#  Decap CMS — config.yml
+#  RobotikSD · Colegio Saladares
+#  Docs: https://decapcms.org/docs/
+# ══════════════════════════════════════════════════════════════
+
+backend:
+  name: git-gateway          # Netlify Git Gateway (recomendado)
+  branch: main               # Rama principal de tu repositorio
+
+# Si usas GitHub Pages directamente (sin Netlify), comenta lo anterior
+# y descomenta lo siguiente:
+# backend:
+#   name: github
+#   repo: TU-USUARIO/TU-REPO   # ej: robotiksd/web-saladares
+#   branch: main
+
+# ── Almacenamiento de media ──────────────────────────────────
+media_folder: "media/images"          # Carpeta donde se guardan las imágenes subidas
+public_folder: "media/images"         # Ruta pública para las imágenes en el HTML
+
+# ── Panel de administración local (desarrollo) ───────────────
+local_backend: false   # Cambia a true para pruebas locales con npx decap-server
+
+# ── Idioma del panel ─────────────────────────────────────────
+locale: es
+
+# ── Colecciones ══════════════════════════════════════════════
+collections:
+
+  # ── 1. PROYECTOS ──────────────────────────────────────────
+  - name: "proyectos"
+    label: "📁 Proyectos"
+    label_singular: "Proyecto"
+    folder: "content/proyectos"
+    create: true
+    slug: "{{slug}}"            # Nombre del archivo = slug del título
+    identifier_field: "title"
+    summary: "{{title}} · {{category}} · {{date}}"
+    sortable_fields: ["date", "title", "category"]
+    view_filters:
+      - label: "Robótica"
+        field: category
+        pattern: "robotica"
+      - label: "Scratch"
+        field: category
+        pattern: "scratch"
+      - label: "Arduino"
+        field: category
+        pattern: "arduino"
+      - label: "Python"
+        field: category
+        pattern: "python"
+      - label: "IA"
+        field: category
+        pattern: "ia"
+      - label: "Web"
+        field: category
+        pattern: "web"
+    fields:
+      - { label: "Título del proyecto", name: "title", widget: "string", hint: "Ej: Robot Seguidor de Línea" }
+      - label: "Categoría"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "🤖 Robótica", value: "robotica" }
+          - { label: "🎮 Scratch / Programación bloques", value: "scratch" }
+          - { label: "⚡ Arduino / Electrónica", value: "arduino" }
+          - { label: "🐍 Python", value: "python" }
+          - { label: "🧠 Inteligencia Artificial", value: "ia" }
+          - { label: "🌐 Desarrollo Web", value: "web" }
+      - { label: "Descripción corta", name: "description", widget: "text", hint: "2-3 frases sobre el proyecto (aparece en la tarjeta)" }
+      - label: "Imagen de portada"
+        name: "image"
+        widget: "image"
+        required: false
+        media_folder: "media/images"
+        public_folder: "media/images"
+        hint: "JPG o PNG, máx 1 MB. Si no hay imagen se mostrará el emoji."
+      - label: "Emoji (si no hay imagen)"
+        name: "emoji"
+        widget: "string"
+        default: "🔧"
+        required: false
+        hint: "Ej: 🤖 🎮 🐍 🧠 🌐"
+      - label: "Color de fondo (gradiente CSS)"
+        name: "gradient"
+        widget: "string"
+        default: "linear-gradient(135deg, #1565c0 0%, #00bcd4 100%)"
+        required: false
+        hint: "Solo se usa si no hay imagen. Copia uno de los ejemplos del README."
+      - label: "Etiquetas / Tecnologías"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+        hint: "Ej: Lego EV3, mBlock, Python..."
+      - label: "¿Tiene vídeo asociado?"
+        name: "hasVideo"
+        widget: "boolean"
+        default: false
+        hint: "Activa si has añadido un vídeo de YouTube para este proyecto."
+      - label: "¿Tiene PDF asociado?"
+        name: "hasPDF"
+        widget: "boolean"
+        default: false
+        hint: "Activa si has subido un documento PDF para este proyecto."
+      - { label: "Fecha del proyecto", name: "date", widget: "datetime", format: "YYYY-MM", date_format: "YYYY-MM", time_format: false }
+      - { label: "Curso / Nivel", name: "course", widget: "string", hint: "Ej: Nivel 3 · PAI 8-9", required: false }
+      - label: "Contenido extendido (opcional)"
+        name: "body"
+        widget: "markdown"
+        required: false
+        hint: "Descripción larga, proceso de trabajo, resultados... (uso futuro para página de detalle)"
+
+  # ── 2. VÍDEOS ─────────────────────────────────────────────
+  - name: "videos"
+    label: "🎬 Vídeos YouTube"
+    label_singular: "Vídeo"
+    folder: "content/videos"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    summary: "{{title}}"
+    fields:
+      - { label: "Título del vídeo", name: "title", widget: "string" }
+      - label: "URL o ID de YouTube"
+        name: "youtubeId"
+        widget: "string"
+        hint: "Pega la URL completa (https://youtu.be/XXXX o https://www.youtube.com/watch?v=XXXX) o solo el ID de 11 caracteres."
+      - { label: "Descripción breve", name: "description", widget: "text", required: false, hint: "Aparece debajo del vídeo en la galería." }
+      - { label: "Proyecto relacionado (slug)", name: "projectId", widget: "string", required: false, hint: "Ej: robot-seguidor. Debe coincidir con el slug del proyecto." }
+      - { label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+
+  # ── 3. GALERÍA DE IMÁGENES ────────────────────────────────
+  - name: "imagenes"
+    label: "🖼️ Galería de Imágenes"
+    label_singular: "Imagen"
+    folder: "content/imagenes"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "alt"
+    summary: "{{alt}}"
+    media_folder: "media/images"
+    public_folder: "media/images"
+    fields:
+      - label: "Imagen"
+        name: "src"
+        widget: "image"
+        media_folder: "media/images"
+        public_folder: "media/images"
+        hint: "JPG o PNG. Recomendado máx 800px ancho para la galería. Máx 1 MB."
+      - { label: "Descripción / Alt text", name: "alt", widget: "string", hint: "Describe la imagen brevemente. Ej: Alumnos programando con Scratch" }
+      - { label: "Proyecto relacionado (slug)", name: "projectId", widget: "string", required: false }
+      - { label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+
+  # ── 4. DOCUMENTOS PDF ────────────────────────────────────
+  - name: "pdfs"
+    label: "📄 Documentos PDF"
+    label_singular: "PDF"
+    folder: "content/pdfs"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "name"
+    summary: "{{name}}"
+    media_folder: "media/pdfs"
+    public_folder: "media/pdfs"
+    fields:
+      - { label: "Nombre del documento", name: "name", widget: "string", hint: "Ej: Guía del Proyecto Robot Seguidor.pdf" }
+      - label: "Archivo PDF"
+        name: "url"
+        widget: "file"
+        media_folder: "media/pdfs"
+        public_folder: "media/pdfs"
+        hint: "Sube el archivo PDF aquí. Máx recomendado: 10 MB."
+        allow_multiple: false
+      - { label: "Descripción", name: "description", widget: "text", required: false, hint: "Una línea explicando qué contiene el documento." }
+      - { label: "Tamaño (para mostrar)", name: "size", widget: "string", required: false, hint: "Ej: 2.4 MB" }
+      - { label: "Proyecto relacionado (slug)", name: "projectId", widget: "string", required: false }
+      - { label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }

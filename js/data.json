@@ -1,0 +1,139 @@
+{
+  "projects": [
+    {
+      "id": "robot-seguidor",
+      "title": "Robot Seguidor de Línea",
+      "category": "robotica",
+      "description": "Construimos un robot autónomo capaz de seguir una línea negra usando sensores de infrarrojos y programación por bloques en mBlock. El proyecto culminó con una mini-competición entre equipos.",
+      "image": "media/images/robot-seguidor.jpg",
+      "emoji": "🤖",
+      "gradient": "linear-gradient(135deg, #1565c0 0%, #00bcd4 100%)",
+      "tags": ["Lego EV3", "mBlock", "Sensores IR"],
+      "hasVideo": true,
+      "hasPDF": true,
+      "date": "2025-03",
+      "course": "Nivel 3 · PAI 8-9"
+    },
+    {
+      "id": "juego-scratch",
+      "title": "Videojuego Plataformas Scratch",
+      "category": "scratch",
+      "description": "Diseño y programación completa de un videojuego de plataformas con sprites personalizados, múltiples niveles, puntuación y efectos de sonido propios.",
+      "image": "",
+      "emoji": "🎮",
+      "gradient": "linear-gradient(135deg, #e53935 0%, #ff7043 100%)",
+      "tags": ["Scratch 3.0", "Diseño", "Sprites", "Sonido"],
+      "hasVideo": false,
+      "hasPDF": true,
+      "date": "2025-02",
+      "course": "Nivel 2 · PEP 6-7"
+    },
+    {
+      "id": "estacion-iot",
+      "title": "Estación Meteorológica IoT",
+      "category": "arduino",
+      "description": "Sensor de temperatura, humedad y presión conectado a internet con ESP32. Datos en tiempo real visualizados en un dashboard web propio creado por los alumnos.",
+      "image": "",
+      "emoji": "🌡️",
+      "gradient": "linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%)",
+      "tags": ["Arduino", "ESP32", "IoT", "HTML/CSS"],
+      "hasVideo": true,
+      "hasPDF": true,
+      "date": "2025-04",
+      "course": "Nivel 4 · PAI 12-16"
+    },
+    {
+      "id": "clasificador-ia",
+      "title": "Clasificador de Residuos con IA",
+      "category": "ia",
+      "description": "Entrenamos un modelo de Machine Learning con Teachable Machine y lo integramos en una web para clasificar residuos reciclables en tiempo real usando la cámara del dispositivo.",
+      "image": "",
+      "emoji": "🧠",
+      "gradient": "linear-gradient(135deg, #ad1457 0%, #f06292 100%)",
+      "tags": ["ML", "Teachable Machine", "Python", "TensorFlow"],
+      "hasVideo": true,
+      "hasPDF": false,
+      "date": "2025-05",
+      "course": "Nivel 4 · PAI 12-16"
+    },
+    {
+      "id": "portfolio-web",
+      "title": "Portfolio Web Personal",
+      "category": "web",
+      "description": "Cada alumno crea su propio portfolio web desde cero con HTML5, CSS3 y JavaScript. Diseño responsive y despliegue final en GitHub Pages para que familias puedan verlo.",
+      "image": "",
+      "emoji": "🌐",
+      "gradient": "linear-gradient(135deg, #4527a0 0%, #7c4dff 100%)",
+      "tags": ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
+      "hasVideo": false,
+      "hasPDF": true,
+      "date": "2025-06",
+      "course": "Nivel 4 · PAI 12-16"
+    },
+    {
+      "id": "serpiente-python",
+      "title": "Snake en Python",
+      "category": "python",
+      "description": "Recreación del clásico juego Snake usando Python y Pygame. Se trabaja programación orientada a objetos, bucles de juego, manejo de eventos y colisiones.",
+      "image": "",
+      "emoji": "🐍",
+      "gradient": "linear-gradient(135deg, #f57f17 0%, #ffd600 100%)",
+      "tags": ["Python", "Pygame", "OOP", "Algoritmos"],
+      "hasVideo": false,
+      "hasPDF": false,
+      "date": "2025-03",
+      "course": "Nivel 4 · PAI 12-16"
+    }
+  ],
+  "videos": [
+    {
+      "id": "v1",
+      "youtubeId": "dQw4w9WgXcQ",
+      "title": "Robot Seguidor de Línea — Competición Final",
+      "description": "Demostración del robot en el circuito de pruebas durante la mini-competición entre equipos."
+    },
+    {
+      "id": "v2",
+      "youtubeId": "ScMzIvxBSi4",
+      "title": "Estación Meteorológica IoT en Acción",
+      "description": "Presentación del proyecto IoT ante las familias. Dashboard en tiempo real con datos reales."
+    },
+    {
+      "id": "v3",
+      "youtubeId": "ysz5S6PUM-U",
+      "title": "Demo Clasificador IA — Reciclaje Inteligente",
+      "description": "El modelo de Machine Learning distinguiendo residuos reciclables en tiempo real con la cámara."
+    }
+  ],
+  "images": [
+    { "id": "i1", "src": "img/img1.jpg", "alt": "Taller de robótica con Lego EV3" },
+    { "id": "i2", "src": "img/img2.jpg", "alt": "Sesión de programación Scratch" },
+    { "id": "i3", "src": "img/img3.jpg", "alt": "Construcción del robot seguidor" },
+    { "id": "i4", "src": "img/img4.jpg", "alt": "Presentación de proyectos a las familias" },
+    { "id": "i5", "src": "img/img5.jpg", "alt": "Laboratorio Arduino y electrónica" },
+    { "id": "i6", "src": "img/img6.jpg", "alt": "Equipo trabajando en proyecto web" }
+  ],
+  "pdfs": [
+    {
+      "id": "p1",
+      "name": "Guía del Proyecto Robot Seguidor.pdf",
+      "url": "media/pdfs/guia-robot-seguidor.pdf",
+      "size": "1.2 MB",
+      "description": "Documentación completa del proyecto de robótica nivel 3."
+    },
+    {
+      "id": "p2",
+      "name": "Dossier Estación Meteorológica IoT.pdf",
+      "url": "media/pdfs/dossier-iot.pdf",
+      "size": "3.4 MB",
+      "description": "Memoria técnica del proyecto IoT con ESP32 y dashboard web."
+    },
+    {
+      "id": "p3",
+      "name": "Itinerario Formativo 2026-2027.pdf",
+      "url": "media/pdfs/itinerario-formativo.pdf",
+      "size": "0.8 MB",
+      "description": "Programa oficial de la actividad extraescolar completo."
+    }
+  ]
+}
