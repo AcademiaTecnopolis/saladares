@@ -13,7 +13,7 @@
  */
 
 // ─── CONFIG ─────────────────────────────────────────────────────────────────
-const DATA_URL    = 'js/data.json';   // Auto-generated from CMS content
+const DATA_URL = '/saladares/js/data.json';
 const YOUTUBE_NOCOOKIE = 'https://www.youtube-nocookie.com/embed/';
 
 // ─── STATE ──────────────────────────────────────────────────────────────────
