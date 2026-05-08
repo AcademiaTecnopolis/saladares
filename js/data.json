@@ -36,30 +36,30 @@
     }
   ],
   "images": [
-    { "id": "i1", "src": "img/img1.webp", "alt": "" },
-    { "id": "i2", "src": "img/img2.webp", "alt": "" },
-    { "id": "i3", "src": "img/img3.webp", "alt": "" },
-    { "id": "i4", "src": "img/img4.webp", "alt": "" },
-    { "id": "i5", "src": "img/img5.webp", "alt": "" },
-    { "id": "i6", "src": "img/img6.webp", "alt": "" }
-    { "id": "i7", "src": "img/img7.webp", "alt": "" },
-    { "id": "i8", "src": "img/img8.webp", "alt": "" },
-    { "id": "i9", "src": "img/img9.webp", "alt": "" },
-    { "id": "i10", "src": "img/img10.webp", "alt": "" },
-    { "id": "i11", "src": "img/img11.webp", "alt": "" },
-    { "id": "i12", "src": "img/img12.webp", "alt": "" }
-    { "id": "i13", "src": "img/img13.webp", "alt": "" },
-    { "id": "i14", "src": "img/img14.webp", "alt": "" },
-    { "id": "i15", "src": "img/img15.webp", "alt": "" },
-    { "id": "i16", "src": "img/img16.webp", "alt": "" },
-    { "id": "i17", "src": "img/img17.webp", "alt": "" },
-    { "id": "i18", "src": "img/img18.webp", "alt": "" }
-    { "id": "i19", "src": "img/img19.webp", "alt": "" },
-    { "id": "i20", "src": "img/img20.webp", "alt": "" },
-    { "id": "i21", "src": "img/img21.webp", "alt": "" },
-    { "id": "i22", "src": "img/img22.webp", "alt": "" },
-    { "id": "i23", "src": "img/img23.webp", "alt": "" },
-    { "id": "i24", "src": "img/img24.webp", "alt": "" }
+    { "id": "i1", "src": "image/img1.webp", "alt": "" },
+    { "id": "i2", "src": "image/img2.webp", "alt": "" },
+    { "id": "i3", "src": "image/img3.webp", "alt": "" },
+    { "id": "i4", "src": "image/img4.webp", "alt": "" },
+    { "id": "i5", "src": "image/img5.webp", "alt": "" },
+    { "id": "i6", "src": "image/img6.webp", "alt": "" }
+    { "id": "i7", "src": "image/img7.webp", "alt": "" },
+    { "id": "i8", "src": "image/img8.webp", "alt": "" },
+    { "id": "i9", "src": "image/img9.webp", "alt": "" },
+    { "id": "i10", "src": "image/img10.webp", "alt": "" },
+    { "id": "i11", "src": "image/img11.webp", "alt": "" },
+    { "id": "i12", "src": "image/img12.webp", "alt": "" }
+    { "id": "i13", "src": "image/img13.webp", "alt": "" },
+    { "id": "i14", "src": "image/img14.webp", "alt": "" },
+    { "id": "i15", "src": "image/img15.webp", "alt": "" },
+    { "id": "i16", "src": "image/img16.webp", "alt": "" },
+    { "id": "i17", "src": "image/img17.webp", "alt": "" },
+    { "id": "i18", "src": "image/img18.webp", "alt": "" }
+    { "id": "i19", "src": "image/img19.webp", "alt": "" },
+    { "id": "i20", "src": "image/img20.webp", "alt": "" },
+    { "id": "i21", "src": "image/img21.webp", "alt": "" },
+    { "id": "i22", "src": "image/img22.webp", "alt": "" },
+    { "id": "i23", "src": "image/img23.webp", "alt": "" },
+    { "id": "i24", "src": "image/img24.webp", "alt": "" }
 
 
 
