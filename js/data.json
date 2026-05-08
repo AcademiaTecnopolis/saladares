@@ -36,7 +36,7 @@
     }
   ],
   "images": [
-    { "id": "i1", "src": "image/img1.webp", "alt": "" },
+    { "id": "i1", "src": "/saladares/content/image/img1.webp", "alt": "" },
     { "id": "i2", "src": "image/img2.webp", "alt": "" },
     { "id": "i3", "src": "image/img3.webp", "alt": "" },
     { "id": "i4", "src": "image/img4.webp", "alt": "" },
