@@ -36,30 +36,30 @@
     }
   ],
   "images": [
-    { "id": "i1", "src": "img/img1.jpg", "alt": "" },
-    { "id": "i2", "src": "img/img2.jpg", "alt": "" },
-    { "id": "i3", "src": "img/img3.jpg", "alt": "" },
-    { "id": "i4", "src": "img/img4.jpg", "alt": "" },
-    { "id": "i5", "src": "img/img5.jpg", "alt": "" },
-    { "id": "i6", "src": "img/img6.jpg", "alt": "" }
-    { "id": "i7", "src": "img/img7.jpg", "alt": "" },
-    { "id": "i8", "src": "img/img8.jpg", "alt": "" },
-    { "id": "i9", "src": "img/img9.jpg", "alt": "" },
-    { "id": "i10", "src": "img/img10.jpg", "alt": "" },
-    { "id": "i11", "src": "img/img11.jpg", "alt": "" },
-    { "id": "i12", "src": "img/img12.jpg", "alt": "" }
-    { "id": "i13", "src": "img/img13.jpg", "alt": "" },
-    { "id": "i14", "src": "img/img14.jpg", "alt": "" },
-    { "id": "i15", "src": "img/img15.jpg", "alt": "" },
-    { "id": "i16", "src": "img/img16.jpg", "alt": "" },
-    { "id": "i17", "src": "img/img17.jpg", "alt": "" },
-    { "id": "i18", "src": "img/img18.jpg", "alt": "" }
-    { "id": "i19", "src": "img/img19.jpg", "alt": "" },
-    { "id": "i20", "src": "img/img20.jpg", "alt": "" },
-    { "id": "i21", "src": "img/img21.jpg", "alt": "" },
-    { "id": "i22", "src": "img/img22.jpg", "alt": "" },
-    { "id": "i23", "src": "img/img23.jpg", "alt": "" },
-    { "id": "i24", "src": "img/img24.jpg", "alt": "" }
+    { "id": "i1", "src": "img/img1.webp", "alt": "" },
+    { "id": "i2", "src": "img/img2.webp", "alt": "" },
+    { "id": "i3", "src": "img/img3.webp", "alt": "" },
+    { "id": "i4", "src": "img/img4.webp", "alt": "" },
+    { "id": "i5", "src": "img/img5.webp", "alt": "" },
+    { "id": "i6", "src": "img/img6.webp", "alt": "" }
+    { "id": "i7", "src": "img/img7.webp", "alt": "" },
+    { "id": "i8", "src": "img/img8.webp", "alt": "" },
+    { "id": "i9", "src": "img/img9.webp", "alt": "" },
+    { "id": "i10", "src": "img/img10.webp", "alt": "" },
+    { "id": "i11", "src": "img/img11.webp", "alt": "" },
+    { "id": "i12", "src": "img/img12.webp", "alt": "" }
+    { "id": "i13", "src": "img/img13.webp", "alt": "" },
+    { "id": "i14", "src": "img/img14.webp", "alt": "" },
+    { "id": "i15", "src": "img/img15.webp", "alt": "" },
+    { "id": "i16", "src": "img/img16.webp", "alt": "" },
+    { "id": "i17", "src": "img/img17.webp", "alt": "" },
+    { "id": "i18", "src": "img/img18.webp", "alt": "" }
+    { "id": "i19", "src": "img/img19.webp", "alt": "" },
+    { "id": "i20", "src": "img/img20.webp", "alt": "" },
+    { "id": "i21", "src": "img/img21.webp", "alt": "" },
+    { "id": "i22", "src": "img/img22.webp", "alt": "" },
+    { "id": "i23", "src": "img/img23.webp", "alt": "" },
+    { "id": "i24", "src": "img/img24.webp", "alt": "" }
 
 
 
