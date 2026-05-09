@@ -780,5 +780,24 @@
         <div class="text-slate-600">© 2026 <a href="http://academiatecnopolis.com" target="_blank" rel="noopener noreferrer">Academia Tecnópolis</a>. Todos los derechos reservados.</div>
     </div>
 </footer>
+<script>
+  const modal = document.getElementById('modalContacto');
+
+  function openModal(event) {
+    if (event) event.preventDefault(); // Evita que el enlace recargue la página
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Bloquea el scroll del fondo
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto'; // Reactiva el scroll
+  }
+
+  // Cerrar si se pulsa la tecla ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
 </body>
 </html>
