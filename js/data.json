@@ -100,24 +100,10 @@
   "pdfs": [
     {
       "id": "p1",
-      "name": "Guía del Proyecto Robot Seguidor.pdf",
-      "url": "media/pdfs/guia-robot-seguidor.pdf",
+      "name": "Memoria de la Actividad de Robótica, Programación y Nuevas Tecnologías.pdf",
+      "url": "media/pdfs/PDF1.pdf",
       "size": "1.2 MB",
-      "description": "Documentación completa del proyecto de robótica nivel 3."
-    },
-    {
-      "id": "p2",
-      "name": "Dossier Estación Meteorológica IoT.pdf",
-      "url": "media/pdfs/dossier-iot.pdf",
-      "size": "3.4 MB",
-      "description": "Memoria técnica del proyecto IoT con ESP32 y dashboard web."
-    },
-    {
-      "id": "p3",
-      "name": "Itinerario Formativo 2026-2027.pdf",
-      "url": "media/pdfs/itinerario-formativo.pdf",
-      "size": "0.8 MB",
-      "description": "Programa oficial de la actividad extraescolar completo."
-    }
+      "description": "Memoria de la Actividad de Robótica, Programación y Nuevas Tecnologías"
+    }   
   ]
 }
