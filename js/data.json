@@ -21,18 +21,6 @@
       "youtubeId": "dQw4w9WgXcQ",
       "title": "Robot Seguidor de Línea — Competición Final",
       "description": "Demostración del robot en el circuito de pruebas durante la mini-competición entre equipos."
-    },
-    {
-      "id": "v2",
-      "youtubeId": "ScMzIvxBSi4",
-      "title": "Estación Meteorológica IoT en Acción",
-      "description": "Presentación del proyecto IoT ante las familias. Dashboard en tiempo real con datos reales."
-    },
-    {
-      "id": "v3",
-      "youtubeId": "ysz5S6PUM-U",
-      "title": "Demo Clasificador IA — Reciclaje Inteligente",
-      "description": "El modelo de Machine Learning distinguiendo residuos reciclables en tiempo real con la cámara."
     }
   ],
   "images": [
