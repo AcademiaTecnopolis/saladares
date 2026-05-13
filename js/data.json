@@ -1,18 +1,7 @@
 {
   "projects": [
     {
-      "id": "memeoria",
-      "title": "Memoria de la Actividad",
-      "category": "robotica",
-      "description": "Memoria descripctiva de nuestra Actuvidad de Robótica, Porgramación y Nuevas Tecnologías.",
-      "image": "media/images/robot-seguidor.jpg",
-      "emoji": "🤖",
-      "gradient": "linear-gradient(135deg, #1565c0 0%, #00bcd4 100%)",
-      "tags": ["Robótica", "Programación", "Microcontroladores", "IA"],
-      "hasVideo": false,
-      "hasPDF": true,
-      "date": "2026-064",
-      "course": "PEP 3-6 · PAI 1-4"
+     
     }
   ],
   "videos": [
