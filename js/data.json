@@ -101,8 +101,15 @@
       "id": "p2",
       "name": "LEGO Education 9686 (Mecanismos Simples y Motorizados)",
       "url": "/saladares/content/pdfs/PDF2.pdf",
-      "size": "0.47 MB",
-      "description": "Instrucciones de montaje (Building Instructions)"
+      "size": "7.22 MB",
+      "description": "Instrucciones de montaje (Building Instructions)- Catapult"
+    },
+    {
+      "id": "p3",
+      "name": "LEGO WeDo 1.0 (9580)",
+      "url": "/saladares/content/pdfs/PDF3.pdf",
+      "size": "2.90 MB",
+      "description": "Instrucciones de montaje (Building Instructions) -Flying-Bird"
     }   
   ]
 }
