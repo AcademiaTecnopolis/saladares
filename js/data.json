@@ -18,9 +18,9 @@
   "videos": [
     {
       "id": "v1",
-      "youtubeId": "dQw4w9WgXcQ",
-      "title": "Robot Seguidor de Línea — Competición Final",
-      "description": "Demostración del robot en el circuito de pruebas durante la mini-competición entre equipos."
+      "youtubeId": "F-GL8aPVxIg",
+      "title": "Taller de pilotaje de Drones Terrestres",
+      "description": "Taller de pilotaje de Drones Terrestres PEP 6 - PEP 7."
     }
   ],
   "images": [
@@ -96,6 +96,13 @@
       "url": "/saladares/content/pdfs/PDF1.pdf",
       "size": "0.47 MB",
       "description": "Memoria de la Actividad de Robótica, Programación y Nuevas Tecnologías"
+    },   
+    {
+      "id": "p2",
+      "name": "LEGO Education 9686 (Mecanismos Simples y Motorizados)",
+      "url": "/saladares/content/pdfs/PDF2.pdf",
+      "size": "0.47 MB",
+      "description": "Instrucciones de montaje (Building Instructions)"
     }   
   ]
 }
