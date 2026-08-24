@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Taller: Instrumentos Virtuales con Scratch y Makey Makey</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "synth-deep": "#170B36",
+            "synth-deep-2": "#0F0726",
+            "synth-panel": "#241454",
+            "neon-pink": "#FF2E9A",
+            "neon-violet": "#9B5CF6",
+            "neon-cyan": "#2EE6D6",
+            "ink": "#1C1030",
+            "ink-soft": "#5B4D78",
+            "paper": "#FBF8FF",
+            "paper-warm": "#F1E9FA",
+            "card-bg": "#FFFFFF",
+          },
+          fontFamily: {
+            "display": ["Unbounded", "sans-serif"],
+            "body": ["Plus Jakarta Sans", "sans-serif"],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Unbounded', sans-serif;
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 46, 154, 0.32) 0%, transparent 42%),
+        radial-gradient(circle at 85% 78%, rgba(46, 230, 214, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 82% 12%, rgba(155, 92, 246, 0.28) 0%, transparent 38%),
+        linear-gradient(135deg, #0F0726 0%, #170B36 45%, #2A1366 100%);
+    }
+
+    .circuit-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(46, 230, 214, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46, 230, 214, 0.07) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #FF2E9A 0%, #C81F86 100%);
+      color: #ffffff;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.9rem 2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.02rem;
+      box-shadow: 0 4px 20px rgba(255, 46, 154, 0.45);
+      font-family: 'Unbounded', sans-serif;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #FF4BAA 0%, #FF2E9A 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(255, 46, 154, 0.55);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #e7e2f5;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 0.9rem 2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.02rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      font-family: 'Unbounded', sans-serif;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-cta {
+      background: #9B5CF6;
+      color: white;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 1rem 2.2rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 18px rgba(155, 92, 246, 0.4);
+      font-family: 'Unbounded', sans-serif;
+    }
+
+    .btn-cta:hover {
+      background: #8447e8;
+      transform: translateY(-2px);
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+
+    .check-icon {
+      color: #17b3a3;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      background: #F1E9FA;
+      color: #9B5CF6;
+      font-weight: 700;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.32rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 0.9rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .pad-slot {
+      background: linear-gradient(160deg, #241454 0%, #170B36 100%);
+      border-radius: 1.1rem;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 1/1;
+      border: 1.5px solid rgba(46, 230, 214, 0.25);
+      transition: border-color 0.25s, transform 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .pad-slot:hover {
+      border-color: rgba(255, 46, 154, 0.55);
+      transform: translateY(-3px);
+    }
+    .pad-slot img {
+      width: 100%;
+      height: 80%;
+      object-fit: contain;
+      background: #93c54c;
+      display: block;
+      opacity: 0.96;
+    }
+    .pad-slot .pad-label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #e7e2f5;
+      background: rgba(15, 7, 38, 0.7);
+    }
+
+    /* Level badge colors */
+    .level-inicio { background: #E3FBF7; color: #0f7a6c; border-color: #8fe3d4; }
+    .level-medio { background: #F1E9FA; color: #6a2fc4; border-color: #c9aff5; }
+    .level-reto { background: #FFE3F1; color: #b8106a; border-color: #ff9ccb; }
+
+    .instrument-card {
+      background: white;
+      border-radius: 1.1rem;
+      padding: 1.6rem;
+      border: 1px solid #ece4f7;
+      transition: all 0.25s;
+    }
+    .instrument-card:hover {
+      transform: translateY(-6px);
+      border-color: #9B5CF6;
+      box-shadow: 0 15px 35px rgba(155, 92, 246, 0.18);
+    }
+
+    /* separador sutil entre secciones */
+    .section-divider {
+      border-top: 1px solid rgba(155, 92, 246, 0.08);
+    }
+
+    .wire-step {
+      position: relative;
+      flex: 1;
+    }
+    /* En móvil los pasos van en columna (flex-col), así que la línea conectora
+       horizontal no debe mostrarse: se activa solo desde el breakpoint md (768px),
+       que es cuando .wire-step pasa a disponerse en fila (md:flex-row). */
+    @media (min-width: 768px) {
+      .wire-step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 1.35rem;
+        left: calc(50% + 1.6rem);
+        width: calc(100% - 3.2rem);
+        height: 2px;
+        background-image: linear-gradient(90deg, #2EE6D6 0 6px, transparent 6px 12px);
+        background-size: 12px 2px;
+        background-repeat: repeat-x;
+      }
+    }
+    .wire-node {
+      width: 2.7rem;
+      height: 2.7rem;
+      background: #9B5CF6;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: 'Unbounded', sans-serif;
+      flex-shrink: 0;
+      border: 3px solid #2EE6D6;
+      position: relative;
+      z-index: 2;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .step-circle {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: #9B5CF6;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: 'Unbounded', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .final-cta {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 46, 154, 0.28), transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(46, 230, 214, 0.18), transparent 42%),
+        linear-gradient(135deg, #170B36 0%, #4D2CBF 100%);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in   { animation: fadeInUp 0.6s ease-out both; }
+    .fade-in-2 { animation: fadeInUp 0.6s 0.15s ease-out both; }
+  </style>
+</head>
+
+<body class="bg-paper text-ink antialiased">
+
+  <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
+    <nav class="flex justify-between items-center w-full gap-2 px-3.5 sm:px-6 py-3 sm:py-3.5 max-w-6xl mx-auto">
+
+      <div class="font-display font-bold text-sm sm:text-lg tracking-tight text-ink flex items-center gap-1.5 sm:gap-2 min-w-0 flex-shrink">
+        <img src="img/logo.jpg" width="30" class="w-6 h-6 sm:w-[30px] sm:h-[30px] flex-shrink-0" alt="">
+        <span class="truncate">Colegio Saladares</span>
+      </div>
+      <div class="hidden md:flex font-display font-bold text-lg tracking-tight text-ink items-center gap-2 flex-shrink-0">
+        <span style="font-size:1.4rem">🎛️</span> Taller MakeyBand
+      </div>
+      <a href="javascript:void(0)" onclick="openModal(event)" class="btn-primary py-2 px-3.5 sm:py-2.5 sm:px-5 text-xs sm:text-sm flex-shrink-0 whitespace-nowrap">
+        👉 Apuntarse
+      </a>
+    </nav>
+  </header>
+
+  <section class="hero-bg pt-28 pb-20 px-6 relative overflow-hidden">
+    <div class="circuit-grid"></div>
+
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row-reverse items-center gap-14 relative z-10">
+
+      <div class="w-full lg:w-[50%]">
+        <div class="inline-flex items-center gap-2 text-neon-cyan px-4 py-1.5 rounded-full text-sm font-semibold mb-6" style="background:rgba(46,230,214,.12); border:1px solid rgba(46,230,214,.45); box-shadow:0 0 18px rgba(46,230,214,.12);">
+          <span>🎶</span> Septiembre 2026 · Plazas limitadas
+        </div>
+
+        <h1 class="font-display text-4xl md:text-5xl lg:text-[3.15rem] font-extrabold text-white leading-[1.12] mb-5">
+          Tu hijo programará<br />
+          <span style="color:#FF2E9A;">su propio instrumento</span><br />
+          <span class="text-slate-300 text-2xl md:text-3xl font-bold">y lo tocará con las manos</span>
+        </h1>
+
+        <p class="text-slate-300 text-lg mb-6 leading-relaxed max-w-lg">
+          Un taller 100% práctico, donde los alumnos de <strong class="text-white">7 a 11 años</strong>, programarán su aplicación en Scratch y conectan la tarjeta <strong class="text-white">Makey Makey</strong> a objetos cotidianos —cartón, tapones, papel de aluminio— para crear una batería, un xilófono, un piano y su propia mesa de DJ. ¡Y suenan de verdad!
+        </p>
+
+        <div class="flex flex-wrap gap-4 mb-8">
+          <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">✔ Sin experiencia previa</span>
+          <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">✔ Material incluido</span>
+          <span class="flex items-center gap-1.5 text-sm text-slate-300 font-medium">✔ Se llevan su proyecto a casa</span>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a href="javascript:void(0)" onclick="openModal(event)" class="btn-primary">👉 Reservar plaza ahora</a>
+        </div>
+
+        <p class="text-xs text-slate-400 mt-4">
+          Actividad guiada por profesor especializado · Grupos reducidos · 7–11 años
+        </p>
+      </div>
+
+      <div class="w-full lg:w-[50%] fade-in-2">
+        <div class="grid grid-cols-2 gap-3">
+          <div class="pad-slot">
+            <img src="img/bateria.png" alt="Batería virtual con Makey Makey" style="object-position: center 25%;" />
+            <div class="pad-label">🥁 Batería</div>
+          </div>
+          <div class="pad-slot">
+            <img src="img/xilofono.png" alt="Xilófono virtual con Makey Makey" style="object-position: top center;" />
+            <div class="pad-label">🎼 Xilófono</div>
+          </div>
+          <div class="pad-slot">
+            <img src="img/piano.png" alt="Piano virtual con Makey Makey" style="object-position: center 15%;" />
+            <div class="pad-label">🎹 Piano</div>
+          </div>
+          <div class="pad-slot">
+            <img src="img/dj.png" alt="Mesa de DJ virtual con Makey Makey" style="object-position: center 25%;" />
+            <div class="pad-label">🎧 Mesa de DJ</div>
+          </div>
+        </div>
+
+        <div class="mt-3 flex flex-wrap gap-3 justify-center text-sm text-white font-semibold">
+          <span>✅ Suena de verdad</span>
+          <span>✅ Ellos programan</span>
+          <span>✅ Objetos cotidianos</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
+      <div class="lg:w-1/2">
+        <span class="section-label">Para quién es</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink mb-6">¿Es adecuado para mi hijo?</h2>
+        <p class="text-ink-soft mb-6">Este taller es ideal si tu hijo:</p>
+        <div class="space-y-3 mb-6">
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Tiene entre <strong>7 y 11 años</strong></span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Le gusta la música, el ritmo o cantar y tararear</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Quiere programar sin miedo a equivocarse, con bloques visuales de Scratch</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span>Le divierte experimentar con cables, pinzas y objetos poco habituales</span>
+          </div>
+        </div>
+        <div class="bg-paper-warm border-l-4 border-neon-violet rounded-r-lg px-5 py-4">
+          <p class="text-[#6a2fc4] font-semibold">No hace falta saber programar ni tocar ningún instrumento. Empezamos desde cero y cada niño avanza a su ritmo.</p>
+        </div>
+      </div>
+      <div class="lg:w-1/2">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">👦</div>
+            <p class="font-display font-bold text-ink text-sm">7 a 11 años</p>
+            <p class="text-xs text-ink-soft mt-1">Rango de edad</p>
+          </div>
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">👥</div>
+            <p class="font-display font-bold text-ink text-sm">Grupos reducidos</p>
+            <p class="text-xs text-ink-soft mt-1">Atención personalizada</p>
+          </div>
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">🔰</div>
+            <p class="font-display font-bold text-ink text-sm">0 experiencia</p>
+            <p class="text-xs text-ink-soft mt-1">Requerida</p>
+          </div>
+          <div class="bg-paper-warm rounded-xl p-5 text-center">
+            <div class="text-3xl mb-2">💾</div>
+            <p class="font-display font-bold text-ink text-sm">Se lo lleva</p>
+            <p class="text-xs text-ink-soft mt-1">Su proyecto a casa</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 px-6 bg-paper section-divider" id="instrumentos">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-4">
+        <span class="section-label">Instrumentos</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">4 instrumentos, 4 retos</h2>
+        <p class="text-ink-soft mt-3 max-w-xl mx-auto">Empiezan por la batería y van subiendo de nivel semana a semana, hasta programar su propia mesa de mezclas.</p>
+      </div>
+
+      <div class="mb-10 flex justify-center">
+        <div class="bg-neon-violet/10 border border-neon-violet/25 rounded-xl px-6 py-3 text-center max-w-lg">
+          <p class="text-[#6a2fc4] font-semibold text-sm">🎯 El taller sigue una progresión: cuanto más avanza, más complejo es el instrumento.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+
+        <div class="instrument-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🥁</div>
+            <div>
+              <span class="inline-block text-xs font-bold px-3 py-1 rounded-full border level-inicio mb-1">Iniciación</span>
+              <h3 class="font-display font-bold text-ink text-lg leading-tight">Batería</h3>
+            </div>
+          </div>
+          <p class="text-ink-soft text-sm mb-3">Cuatro pads conductores que suenan a bombo, caja, plato y tom con solo tocarlos con la mano.</p>
+          <div class="bg-slate-50 rounded-lg p-3 text-xs text-ink-soft">
+            <p class="font-semibold text-ink mb-1">Materiales:</p>
+            <p>Tarjeta Makey Makey · Cables cocodrilo · Tapones· Papel de aluminio · Ordenador con Scratch</p>
+          </div>
+        </div>
+
+        <div class="instrument-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🎼</div>
+            <div>
+              <span class="inline-block text-xs font-bold px-3 py-1 rounded-full border level-inicio mb-1">Iniciación</span>
+              <h3 class="font-display font-bold text-ink text-lg leading-tight">Xilófono</h3>
+            </div>
+          </div>
+          <p class="text-ink-soft text-sm mb-3">Ocho teclas conductoras, afinadas como un xilófono real.</p>
+          <div class="bg-slate-50 rounded-lg p-3 text-xs text-ink-soft">
+            <p class="font-semibold text-ink mb-1">Materiales:</p>
+            <p>Makey Makey · Palos de madera · Goma espuma · Cables cocodrilo · Scratch</p>
+          </div>
+        </div>
+
+        <div class="instrument-card">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🎹</div>
+            <div>
+              <span class="inline-block text-xs font-bold px-3 py-1 rounded-full border level-medio mb-1">Intermedio</span>
+              <h3 class="font-display font-bold text-ink text-lg leading-tight">Piano</h3>
+            </div>
+          </div>
+          <p class="text-ink-soft text-sm mb-3">Un teclado de una octava hecho con cucharas de madera y papel de aluminio sobre la mesa.</p>
+          <div class="bg-slate-50 rounded-lg p-3 text-xs text-ink-soft">
+            <p class="font-semibold text-ink mb-1">Materiales:</p>
+            <p>Makey Makey · Cucharas de madera · Lápices de grafito · Papel de aluminio · Scratch</p>
+          </div>
+        </div>
+
+        <div class="instrument-card" style="background:#FFF5FA; border-color:rgba(255,46,154,.25);">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🎧</div>
+            <div>
+              <span class="inline-block text-xs font-bold px-3 py-1 rounded-full border level-reto mb-1">Reto final</span>
+              <h3 class="font-display font-bold text-ink text-lg leading-tight">Mesa de DJ</h3>
+            </div>
+          </div>
+          <p class="text-ink-soft text-sm mb-3">El instrumento más avanzado: mezclan sonidos, añaden efectos y crean su propia sesión en directo.</p>
+          <div class="bg-pink-50 border border-neon-pink/30 rounded-lg p-3 text-xs text-[#b8106a] font-semibold">
+            ⭐ Cierra el taller uniendo todo lo aprendido con batería, xilófono y piano.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 px-6 bg-white" id="aprendizaje">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Aprendizaje</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">Programación, música y mucho ingenio</h2>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🧠</div>
+          <h4 class="font-display font-bold text-ink mb-2 text-sm">Pensamiento computacional</h4>
+          <p class="text-sm text-ink-soft">Programan en bloques con Scratch: secuencias, bucles y eventos de sonido.</p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🔌</div>
+          <h4 class="font-display font-bold text-ink mb-2 text-sm">Electrónica básica</h4>
+          <p class="text-sm text-ink-soft">Descubren cómo un circuito conductor puede sustituir a un teclado.</p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🎵</div>
+          <h4 class="font-display font-bold text-ink mb-2 text-sm">Oído musical</h4>
+          <p class="text-sm text-ink-soft">Reconocen ritmos y notas mientras construyen sus propios instrumentos.</p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🤲</div>
+          <h4 class="font-display font-bold text-ink mb-2 text-sm">Manipulación y precisión</h4>
+          <p class="text-sm text-ink-soft">Conectan pinzas, cables y objetos con cuidado y paciencia.</p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">💡</div>
+          <h4 class="font-display font-bold text-ink mb-2 text-sm">Resolución de problemas</h4>
+          <p class="text-sm text-ink-soft">Si algo no suena, aprenden a revisar el circuito y el código: el método del ingeniero.</p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🎯</div>
+          <h4 class="font-display font-bold text-ink mb-2 text-sm">Concentración</h4>
+          <p class="text-sm text-ink-soft">Cada instrumento exige atención al detalle para que suene bien.</p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">🔁</div>
+          <h4 class="font-display font-bold text-ink mb-2 text-sm">Prueba y mejora</h4>
+          <p class="text-sm text-ink-soft">Ajustan su proyecto hasta conseguir el sonido exacto que buscan.</p>
+        </div>
+        <div class="bg-paper rounded-xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="text-3xl mb-3">⭐</div>
+          <h4 class="font-display font-bold text-ink mb-2 text-sm">Confianza y creatividad</h4>
+          <p class="text-sm text-ink-soft">Terminan el taller habiendo creado algo propio, de la nada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 px-6 bg-paper section-divider" id="materiales">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Material</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">Todo lo necesario para hacer sonar sus ideas</h2>
+        <p class="text-ink-soft mt-2">Todo el material está incluido en el taller.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-neon-violet hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-violet-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-neon-violet text-2xl">settings_input_component</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Tarjeta Makey Makey</p>
+          <p class="text-xs text-ink-soft mt-1">El cerebro del instrumento</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-neon-violet hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-cyan-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-[#17b3a3] text-2xl">cable</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Cables cocodrilo</p>
+          <p class="text-xs text-ink-soft mt-1">Conectan objeto y tarjeta</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-neon-violet hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-pink-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-[#b8106a] text-2xl">eco</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Objetos conductores</p>
+          <p class="text-xs text-ink-soft mt-1">Fruta, plastilina, aluminio</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center border border-slate-200 hover:border-neon-violet hover:shadow-md transition-all">
+          <div class="w-14 h-14 bg-violet-50 rounded-full flex items-center justify-center mx-auto mb-3">
+            <span class="material-symbols-outlined text-neon-violet text-2xl">computer</span>
+          </div>
+          <p class="font-bold text-sm text-ink">Ordenador y Scratch</p>
+          <p class="text-xs text-ink-soft mt-1">Donde programan el sonido</p>
+        </div>
+      </div>
+      <div class="mt-8 bg-synth-deep rounded-2xl p-6 text-white text-center max-w-2xl mx-auto">
+        <p class="text-slate-300 text-sm mb-2">Los objetos conductores varían según el instrumento:</p>
+        <div class="flex flex-wrap gap-2 justify-center text-xs font-semibold">
+          <span class="bg-white/10 rounded-full px-3 py-1">Palos de madera</span>
+          <span class="bg-white/10 rounded-full px-3 py-1">Papel de aluminio</span>
+          <span class="bg-white/10 rounded-full px-3 py-1">Tapones de plástico</span>
+          <span class="bg-white/10 rounded-full px-3 py-1">Lápices de grafito</span>
+          <span class="bg-white/10 rounded-full px-3 py-1">Chinchetas y clips</span>
+          <span class="bg-white/10 rounded-full px-3 py-1">Cartón y Gomas espuma</span>
+          <span class="bg-white/10 rounded-full px-3 py-1">Cables conductores</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="section-label">Dinámica</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-ink">De la idea al primer acorde</h2>
+      </div>
+      <div class="bg-synth-deep rounded-2xl p-8 md:p-12 text-white">
+        <p class="text-slate-300 text-lg text-center mb-10">Cada niño construye <strong class="text-white">su propio instrumento</strong> de principio a fin, con la guía del profesor. Todo de forma <strong class="text-white">sencilla, visual y muy sonora</strong>.</p>
+        <div class="flex flex-col md:flex-row gap-2 md:gap-0 justify-center">
+          <div class="wire-step flex flex-col items-center text-center px-4">
+            <div class="wire-node mb-3">1</div>
+            <p class="font-bold text-white text-sm">Diseñamos el sonido</p>
+            <p class="text-xs text-slate-400 mt-1">El profesor explica qué instrumento van a crear y cómo va a sonar</p>
+          </div>
+          <div class="wire-step flex flex-col items-center text-center px-4">
+            <div class="wire-node mb-3">2</div>
+            <p class="font-bold text-white text-sm">Programamos y conectamos</p>
+            <p class="text-xs text-slate-400 mt-1">Programan en Scratch y conectan la Makey Makey a los objetos</p>
+          </div>
+          <div class="wire-step flex flex-col items-center text-center px-4">
+            <div class="wire-node mb-3">3</div>
+            <p class="font-bold text-white text-sm">¡A tocar!</p>
+            <p class="text-xs text-slate-400 mt-1">Prueban su instrumento, ajustan el sonido y lo tocan en directo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 px-6 bg-synth-deep text-white" id="horario">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+      <div class="md:w-1/2">
+        <span class="inline-block bg-white/10 text-white/70 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">Información</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold mb-8">Información del taller</h2>
+        <div class="space-y-5">
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-neon-violet rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">calendar_month</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Cuándo</p>
+              <p class="font-bold text-lg">📅 Septiembre 2026</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-neon-violet rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">location_on</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Dónde</p>
+              <p class="font-bold text-lg">📍 Aula Maker de Colegio Saladares</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-neon-violet rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">child_care</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Edad</p>
+              <p class="font-bold text-lg">👦 7 a 11 años</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-11 h-11 bg-neon-pink rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-white">warning</span>
+            </div>
+            <div>
+              <p class="text-slate-400 text-sm">Disponibilidad</p>
+              <p class="font-bold text-lg text-neon-cyan">👥 Plazas limitadas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md:w-1/2 w-full">
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-7 border border-white/10">
+          <h3 class="font-display text-xl font-bold mb-5">¿Cómo será la experiencia?</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]">1</div>
+              <div>
+                <p class="font-semibold">Formamos grupos reducidos</p>
+                <p class="text-sm text-slate-400">Cada niño tiene su ordenador y su tarjeta Makey Makey</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]">2</div>
+              <div>
+                <p class="font-semibold">Programan su instrumento</p>
+                <p class="text-sm text-slate-400">Bloque a bloque en Scratch, con ayuda del profesor</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]">3</div>
+              <div>
+                <p class="font-semibold">Conectan el circuito</p>
+                <p class="text-sm text-slate-400">Con cables y objetos conductores de verdad</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="step-circle text-sm w-8 h-8 min-w-[2rem]" style="background:#2EE6D6;color:#0F0726;">4</div>
+              <div>
+                <p class="font-semibold text-neon-cyan">¡Suena su instrumento!</p>
+                <p class="text-sm text-slate-400">Lo tocan en directo delante de sus compañeros</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 px-6 final-cta" id="registro">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="font-display text-4xl md:text-5xl font-extrabold text-white mb-4">¡Plazas muy limitadas!</h2>
+      <p class="text-violet-100 text-lg mb-8">Grupos reducidos para garantizar atención personalizada.<br />Reserva ahora — ¡le prepararemos su instrumento!</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="javascript:void(0)" onclick="openModal(event)"
+          class="bg-neon-pink text-white font-extrabold px-10 py-4 rounded-full text-lg shadow-lg hover:bg-pink-600 transition-all duration-200 flex items-center gap-2">
+          👉 Inscribirse ahora
+        </a>
+      </div>
+      <p class="mt-8 text-violet-200 text-sm">📅 Septiembre 2026 · 📍 Aula Maker Colegio Saladares · 👦 7–11 años</p>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/10" style="background:linear-gradient(180deg,#12082B,#090414);">
+    
+    <div class="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4 font-body text-xs">
+      <div class="text-lg font-bold text-neon-cyan font-display">Taller MakeyBand</div>
+      <div class="text-slate-400 text-center">
+        <strong class="text-slate-300">Programación &amp; Música</strong> · Actividad Extraescolar<br />
+        <span class="text-slate-500">www.altaduna-saladares.com</span>
+      </div>
+      <div class="text-slate-600">© 2026 Academia Tecópolis. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+<div id="modalContacto" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-4">
+  <div class="absolute inset-0 bg-ink/60 backdrop-blur-sm" onclick="closeModal()"></div>
+
+  <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 transform transition-all border border-slate-200">
+    <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-ink transition-colors">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+
+    <div class="text-center">
+      <div class="w-16 h-16 bg-neon-violet/10 rounded-full flex items-center justify-center mx-auto mb-4">
+        <span class="material-symbols-outlined text-neon-violet text-3xl">info</span>
+      </div>
+      <h3 class="font-display text-xl font-bold text-ink mb-4">Inscripción al Taller</h3>
+      <p class="text-ink-soft leading-relaxed">
+        Póngase en contacto con el Responsable de Actividades Extraescolares del Colegio o con el Tutor de su hijo.
+      </p>
+      <button onclick="closeModal()" class="mt-8 w-full btn-cta justify-center">
+        Entendido
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  const modal = document.getElementById('modalContacto');
+
+  function openModal(event) {
+    if (event) event.preventDefault();
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
+</body>
+
+</html>
