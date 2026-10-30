@@ -11,14 +11,29 @@
   ],
   "videos": [
     {
-      "youtubeId": "F-GL8aPVxIg",
-      "title": "Trabajo en Clase",
-      "description": "Trabajo en clase"
+      "youtubeId": "sqowcMSOXXc",
+      "title": "Trabajo en Clase 1",
+      "description": "Trabajo en clase 1"
     },
     {
-      "youtubeId": "r_Jl48Gt59A",
-      "title": "Trabajo en Clase",
-      "description": "Trabajo en Clase"
+      "youtubeId": "SH8dAF837mY",
+      "title": "Trabajo en Clase 2",
+      "description": "Trabajo en Clase 2"
+    },
+    {
+      "youtubeId": "uXFgjFJqxUU",
+      "title": "Trabajo en Clase 3",
+      "description": "Trabajo en Clase 3"
+    },
+    {
+      "youtubeId": "3BLz0VSsGiY",
+      "title": "Trabajo en Clase 4",
+      "description": "Trabajo en Clase 4"
+    },
+    {
+      "youtubeId": "nlFg0FrtZfw",
+      "title": "Trabajo en Clase 5",
+      "description": "Trabajo en Clase 5"
     }
   ]
 }
