@@ -7,6 +7,14 @@
     {
       "src": "/saladares/content/image/2026-27/img2.webp",
       "alt": ""
+    },
+    {
+      "src": "/saladares/content/image/2026-27/img3.webp",
+      "alt": ""
+    },
+    {
+      "src": "/saladares/content/image/2026-27/img4.webp",
+      "alt": ""
     }
   ],
   "videos": [
@@ -34,6 +42,11 @@
       "youtubeId": "nlFg0FrtZfw",
       "title": "Trabajo en Clase 5",
       "description": "Trabajo en Clase 5"
+    },
+    {
+      "youtubeId": "nlFg0FrtZfw",
+      "title": "Trabajo en Clase 6",
+      "description": "Trabajo en Clase 6"
     }
   ]
 }
